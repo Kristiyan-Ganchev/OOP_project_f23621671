@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.a1.f23621671;
+package bg.tu_varna.sit.a1.f23621671.Books;
 
 public class Book {
     private final String authorName;
@@ -30,10 +30,11 @@ public class Book {
         private float rating;
         private String isbn;
 
-        public BookBuilder(String authorName,String bookTitle,String bookGenre){
+        public BookBuilder(String authorName,String bookTitle,String bookGenre,String isbn){
             this.authorName=authorName;
             this.bookTitle=bookTitle;
             this.bookGenre=bookGenre;
+            this.isbn=isbn;
         }
         public BookBuilder withBookDescription(String description){
             this.bookDescription=description;
@@ -49,10 +50,6 @@ public class Book {
         }
         public BookBuilder withRating(float rating){
             this.rating=rating;
-            return this;
-        }
-        public BookBuilder withISBN(String isbn){
-            this.isbn=isbn;
             return this;
         }
         public Book build(){
