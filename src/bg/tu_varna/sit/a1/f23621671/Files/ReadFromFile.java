@@ -1,8 +1,6 @@
 package bg.tu_varna.sit.a1.f23621671.Files;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 
@@ -19,8 +17,9 @@ public class ReadFromFile {
                 fileContent= Files.readString(file.toPath());
             }
         } catch (IOException e) {
-            System.out.printf("Error\n");
+            System.out.println("Error: "+e);
             ErrorLogger.log(e);
+            System.exit(1);
         }
 
         return fileContent;
