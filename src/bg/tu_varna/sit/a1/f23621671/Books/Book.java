@@ -20,6 +20,62 @@ public class Book {
         this.rating=bookBuilder.rating;
         this.isbn=bookBuilder.isbn;
     }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public String getBookTitle() {
+        return bookTitle;
+    }
+
+    public String getBookGenre() {
+        return bookGenre;
+    }
+
+    public String getBookDescription() {
+        return bookDescription;
+    }
+
+    public int getBookYear() {
+        return bookYear;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public String toWrite() {
+        return  authorName + ';' +
+                bookTitle + ';' +
+                bookGenre + ';' +
+                isbn + ';' +
+                bookDescription + ';' +
+                bookYear + ';'+
+                tags + ';' +
+                rating + '\n';
+    }
+
+    @Override
+    public String toString() {
+        return "AUTHOR:" + authorName +
+                "| TITLE:" + bookTitle +
+                "| GENRE:" + bookGenre +
+                "| DESCRIPTION:" + bookDescription +
+                "| BOOKYEAR:" + bookYear +
+                "| TAGS:" + tags +
+                "| RATING:" + rating +
+                "| ISBN:" + isbn;
+    }
+
     public static class BookBuilder{
         private String authorName;
         private String bookTitle;

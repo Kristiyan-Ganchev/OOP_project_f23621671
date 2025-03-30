@@ -6,7 +6,7 @@ public class CloseCommand implements Command{
     @Override
     public void runCommand(String input) {
         if(!CommandProcessor.currentFile.equals("")){
-        CommandProcessor.content.setLength(0);
+        CommandProcessor.books.clear();
         System.out.println("Successfully closed "+CommandProcessor.currentFile);
         CommandProcessor.currentFile="";}
         else System.out.println("No file loaded!");

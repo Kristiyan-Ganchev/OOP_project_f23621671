@@ -1,0 +1,2 @@
+George Orwell;Animal farm;Satire;9780194267533;All animals are equal, but some are more equal than others.;1945;Satire,Fable,Political;4.6
+George Orwell;1984;Dystopian Fiction;9780451524935;War is peace. Freedom is slavery. Ignorance is strength.;1949;Political,Dystopia,Sci-fi;4.8
