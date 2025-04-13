@@ -14,7 +14,7 @@ public class SaveCommand implements Command{
                 content.append(book.toWrite());
             }
             content.setLength(content.length()-1);
-            WriteToFile.Write(CommandProcessor.currentFile,content.toString());
+            WriteToFile.Write(CommandProcessor.currentFile,content.toString(),false);
             System.out.println("Succesfully saved "+ CommandProcessor.currentFile);}
         else System.out.println("No file loaded!");
     }

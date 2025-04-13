@@ -4,8 +4,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriteToFile {
-    public static void Write(String filename,String msg) {
-        try (FileWriter writer = new FileWriter(filename, false)) {
+    public static void Write(String filename,String msg,boolean append) {
+        try (FileWriter writer = new FileWriter(filename, append)) {
             writer.write(msg);
             writer.flush();
             writer.close();

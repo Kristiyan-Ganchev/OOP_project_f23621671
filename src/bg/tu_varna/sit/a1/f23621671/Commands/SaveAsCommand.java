@@ -13,7 +13,7 @@ public class SaveAsCommand implements Command{
                 content.append(book.toWrite());
             }
             content.setLength(content.length()-1);
-            WriteToFile.Write(input,content.toString());
+            WriteToFile.Write(input,content.toString(),false);
             System.out.println("Succesfully saved "+ input);
         }
         else System.out.println("No file loaded!");

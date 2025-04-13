@@ -1,4 +1,2 @@
-admin i<2Java ADMINISTRATOR
-user user USER
-user user USER
-user user USER
+admin admin Admin
+user user User

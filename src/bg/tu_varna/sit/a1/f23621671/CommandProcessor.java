@@ -4,6 +4,7 @@ import bg.tu_varna.sit.a1.f23621671.Books.Book;
 import bg.tu_varna.sit.a1.f23621671.Commands.*;
 import bg.tu_varna.sit.a1.f23621671.Users.User;
 
+import java.io.IOException;
 import java.util.*;
 
 public class CommandProcessor {
@@ -25,9 +26,10 @@ public class CommandProcessor {
         commandMap.put("booksinfo",new BooksInfo());
         commandMap.put("booksfind",new BooksFindCommand());
         commandMap.put("booksfind",new BooksFindCommand());
+        commandMap.put("usersadd",new UsersAddCommand());
     }
-    //Fix save,saveas
-    public static void run(){
+
+    public static void run() {
         System.out.print ("> ");
         Scanner command= new Scanner(System.in);
         String[] commandTokens = command.nextLine().toLowerCase().split(" ",2);

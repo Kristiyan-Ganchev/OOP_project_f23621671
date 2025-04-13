@@ -6,6 +6,7 @@ import bg.tu_varna.sit.a1.f23621671.Users.AccessLevel;
 import bg.tu_varna.sit.a1.f23621671.Users.User;
 
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class LoginCommand implements Command{
@@ -39,3 +40,4 @@ public class LoginCommand implements Command{
         System.out.println("login");
     }
 }
+
