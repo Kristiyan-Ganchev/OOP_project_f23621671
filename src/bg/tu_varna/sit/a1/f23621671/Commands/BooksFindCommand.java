@@ -6,6 +6,10 @@ import bg.tu_varna.sit.a1.f23621671.CommandProcessor;
 public class BooksFindCommand implements Command{
     @Override
     public void runCommand(String input) {
+        if(CommandProcessor.currentUser==null){
+            System.out.println("Not logged in");
+            return;
+        }
         String[] option=input.split(" ",2);
         if(option[0].equals("title")){
             for (Book book: CommandProcessor.books) {

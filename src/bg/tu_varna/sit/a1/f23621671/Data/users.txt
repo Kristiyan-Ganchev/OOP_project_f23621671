@@ -1,2 +1,3 @@
 admin admin Admin
 user user User
+potrebitel parola User

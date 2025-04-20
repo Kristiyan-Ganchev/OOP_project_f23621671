@@ -4,6 +4,8 @@ import bg.tu_varna.sit.a1.f23621671.Books.Book;
 import bg.tu_varna.sit.a1.f23621671.CommandProcessor;
 import bg.tu_varna.sit.a1.f23621671.Files.ReadFromFile;
 
+import java.io.File;
+
 public class OpenCommand implements Command{
     @Override
     public void runCommand(String input) {
@@ -18,7 +20,8 @@ public class OpenCommand implements Command{
                     .build());
         }
         CommandProcessor.currentFile=input;
-        System.out.println("Successfuly opened "+input);
+        File file =new File(input);
+        System.out.println("Successfuly opened "+file.getName());
     }
     @Override
     public void description(){

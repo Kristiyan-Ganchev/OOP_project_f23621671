@@ -25,8 +25,9 @@ public class CommandProcessor {
         commandMap.put("booksall",new BooksAllCommand());
         commandMap.put("booksinfo",new BooksInfo());
         commandMap.put("booksfind",new BooksFindCommand());
-        commandMap.put("booksfind",new BooksFindCommand());
+        commandMap.put("bookssort",new BooksSortCommand());
         commandMap.put("usersadd",new UsersAddCommand());
+        commandMap.put("usersremove",new UsersRemoveCommand());
     }
 
     public static void run() {
