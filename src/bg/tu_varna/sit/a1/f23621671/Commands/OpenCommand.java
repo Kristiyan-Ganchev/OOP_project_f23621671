@@ -10,6 +10,10 @@ public class OpenCommand implements Command{
     @Override
     public void runCommand(String input) {
         String[] books=ReadFromFile.readFile(input).split("\n");
+        if(books[0].trim().length()==0) {
+            System.out.println("No books in system!");
+            return;
+        }
         for (String book: books) {
             String[] bookData= book.split(";");
             CommandProcessor.books.add(new Book.BookBuilder(bookData[0],bookData[1],bookData[2],bookData[3])

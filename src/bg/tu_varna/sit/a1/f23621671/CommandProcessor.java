@@ -7,7 +7,7 @@ import bg.tu_varna.sit.a1.f23621671.Users.User;
 import java.io.IOException;
 import java.util.*;
 
-public class CommandProcessor {
+public class CommandProcessor {//Make it so all commands that can use stream
     public static ArrayList<Book> books = new ArrayList<>();
     public static User currentUser=null;
     public static String currentFile="";
@@ -26,6 +26,8 @@ public class CommandProcessor {
         commandMap.put("booksinfo",new BooksInfo());
         commandMap.put("booksfind",new BooksFindCommand());
         commandMap.put("bookssort",new BooksSortCommand());
+        commandMap.put("booksadd",new BooksAddCommand());
+        commandMap.put("booksremove",new BooksRemoveCommand());
         commandMap.put("usersadd",new UsersAddCommand());
         commandMap.put("usersremove",new UsersRemoveCommand());
     }
@@ -33,7 +35,7 @@ public class CommandProcessor {
     public static void run() {
         System.out.print ("> ");
         Scanner command= new Scanner(System.in);
-        String[] commandTokens = command.nextLine().toLowerCase().split(" ",2);
+        String[] commandTokens = command.nextLine().toLowerCase().split("[\s]+",2);
 
         Command cmnd= commandMap.get(commandTokens[0]);
         if(cmnd!=null){

@@ -30,7 +30,6 @@ public class LoginCommand implements Command{
                 CommandProcessor.currentUser=new User(username,password, AccessLevel.valueOf(userData[2].trim()));
                 break;
             }
-
         }
         if(CommandProcessor.currentUser==null)System.out.println("Username or password is wrong.");
     }
