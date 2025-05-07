@@ -10,8 +10,8 @@ public class ReadFromFile {
         File file = new File(filename);
 
         try {
-            if (file.createNewFile()) {
-                System.out.println("File created: " + file.getAbsolutePath());
+            if (!file.exists()) {
+                System.out.println("File does not exist!");
             }
             else {
                 fileContent= Files.readString(file.toPath());

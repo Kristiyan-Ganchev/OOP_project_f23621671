@@ -10,4 +10,8 @@ public class User {
         this.password = password;
         this.accessLevel = accessLevel;
     }
+
+    public AccessLevel getAccessLevel() {
+        return accessLevel;
+    }
 }

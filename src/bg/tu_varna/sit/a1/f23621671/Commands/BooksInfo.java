@@ -10,6 +10,10 @@ public class BooksInfo implements Command{
             System.out.println("Not logged in");
             return;
         }
+        if(CommandProcessor.books.isEmpty()){
+            System.out.println("No books in list!");
+            return;
+        }
         for (Book book: CommandProcessor.books)
         {
             if(book.getIsbn().equals(input)) System.out.println(book.toString());

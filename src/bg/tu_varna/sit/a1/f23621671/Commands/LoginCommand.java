@@ -4,9 +4,12 @@ import bg.tu_varna.sit.a1.f23621671.CommandProcessor;
 import bg.tu_varna.sit.a1.f23621671.Files.ReadFromFile;
 import bg.tu_varna.sit.a1.f23621671.Users.AccessLevel;
 import bg.tu_varna.sit.a1.f23621671.Users.User;
+import com.sun.tools.javac.Main;
 
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Scanner;
 
 public class LoginCommand implements Command{
@@ -17,7 +20,7 @@ public class LoginCommand implements Command{
             return;
         }
         Scanner scanner=new Scanner(System.in);
-        String[] users= ReadFromFile.readFile("src/bg/tu_varna/sit/a1/f23621671/Data/users.txt").split("\n");
+        String[] users= ReadFromFile.readFile("Data"+File.separator+"users.txt").split("\n");
         System.out.println("Input username:");
         String username= scanner.nextLine();
         System.out.println("Input password:");

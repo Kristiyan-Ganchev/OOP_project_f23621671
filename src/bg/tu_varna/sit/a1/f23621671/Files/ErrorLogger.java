@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class ErrorLogger {
-    public static void log(IOException e){
+    public static void log(Exception e){
         try (FileWriter errors = new FileWriter("LocalErrors.txt", true)) {
             errors.write(e.toString() + '\n');
             errors.flush();

@@ -3,7 +3,7 @@ package bg.tu_varna.sit.a1.f23621671.Books;
 public class Book {
     private final String authorName;
     private final String bookTitle;
-    private final String bookGenre;
+    private final BookGenres bookGenre;
     private final String bookDescription;
     private final int bookYear;
     private final String tags;
@@ -20,7 +20,6 @@ public class Book {
         this.rating=bookBuilder.rating;
         this.isbn=bookBuilder.isbn;
     }
-
     public String getAuthorName() {
         return authorName;
     }
@@ -29,7 +28,7 @@ public class Book {
         return bookTitle;
     }
 
-    public String getBookGenre() {
+    public BookGenres getBookGenre() {
         return bookGenre;
     }
 
@@ -79,14 +78,14 @@ public class Book {
     public static class BookBuilder{
         private String authorName;
         private String bookTitle;
-        private String bookGenre;
+        private BookGenres bookGenre;
         private String bookDescription;
         private int bookYear;
         private String tags;
         private float rating;
         private String isbn;
 
-        public BookBuilder(String authorName,String bookTitle,String bookGenre,String isbn){
+        public BookBuilder(String authorName,String bookTitle,BookGenres bookGenre,String isbn){
             this.authorName=authorName;
             this.bookTitle=bookTitle;
             this.bookGenre=bookGenre;

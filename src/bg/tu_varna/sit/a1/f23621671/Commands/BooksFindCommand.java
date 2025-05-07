@@ -10,6 +10,10 @@ public class BooksFindCommand implements Command{
             System.out.println("Not logged in");
             return;
         }
+        if(CommandProcessor.books.isEmpty()){
+            System.out.println("No books in list!");
+            return;
+        }
         String[] option=input.split(" ",2);
         if(option[0].equals("title")){
             for (Book book: CommandProcessor.books) {

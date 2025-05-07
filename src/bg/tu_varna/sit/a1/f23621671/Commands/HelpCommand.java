@@ -8,7 +8,7 @@ public class HelpCommand implements Command{
     @Override
     public void runCommand(String input) {
         System.out.println("The following commands are supported:");
-        for (Map.Entry<String,Command> entry: CommandProcessor.getCommandEntries()) {
+        for (Map.Entry<CommandEnums,Command> entry: CommandProcessor.getCommandEntries()) {
             entry.getValue().description();
         }
     }

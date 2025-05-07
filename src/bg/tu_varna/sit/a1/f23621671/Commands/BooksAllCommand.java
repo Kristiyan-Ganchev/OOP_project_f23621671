@@ -11,6 +11,10 @@ public class BooksAllCommand implements Command{
             System.out.println("Not logged in");
             return;
         }
+        if(CommandProcessor.books.isEmpty()){
+            System.out.println("No books in list!");
+            return;
+        }
         for (Book book: CommandProcessor.books) {
             System.out.println("TITLE: "+book.getBookTitle()+" AUTHOR: "+book.getAuthorName()+" GENRE: "+book.getBookGenre()+" ISBN: "+book.getIsbn());
         }

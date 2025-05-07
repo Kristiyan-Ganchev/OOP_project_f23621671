@@ -1,8 +1,0 @@
-George Orwell;Animal farm;Satire;9780194267533;All animals are equal, but some are more equal than others.;1945;Satire,Fable,Political;4.6
-George Orwell;1984;Dystopian Fiction;9780451524935;War is peace. Freedom is slavery. Ignorance is strength.;1949;Political,Dystopia,Sci-fi;4.8
-Harper Lee;To Kill a Mockingbird;Classic Fiction;9780060935467;You never really understand a person until you consider things from his point of view.;1960;Southern Gothic, Legal Drama;4.9
-F. Scott Fitzgerald;The Great Gatsby;Classic Fiction;9780743273565;In my younger and more vulnerable years, my father gave me some advice that I've been turning over in my mind ever since.;1925;Fiction, Tragedy, Romance;4.7
-J.R.R. Tolkien;The Hobbit;Fantasy;9780345339683;In a hole in the ground there lived a hobbit.;1937;Fantasy, Adventure, Children’s Literature;4.9
-Jane Austen;Pride and Prejudice;Romantic Fiction;9780141040349;It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.;1813;Romance, Classic, Satire;4.7
-Isaac Asimov;Foundation;Science Fiction;9780553293357;Violence is the last refuge of the incompetent.;1951;Science Fiction, Space Opera, Dystopian;4.6
-Stephen King;The Shining;Horror Fiction;9780307743657;Here’s Johnny!;1977;Horror, Thriller, Psychological Fiction;4.7

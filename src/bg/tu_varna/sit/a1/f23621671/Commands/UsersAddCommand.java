@@ -13,9 +13,25 @@ import java.util.Scanner;
 public class UsersAddCommand implements Command{
     @Override
     public void runCommand(String input) {
-        String[] userAndPassword = input.split(" ");
+        if(CommandProcessor.currentUser==null){
+            System.out.println("Not logged in");
+            return;
+        }
+        else if(!CommandProcessor.currentUser.getAccessLevel().equals(AccessLevel.ADMINISTRATOR)){
+            System.out.println("User is not administrator!");
+            return;
+        }
+        if(input.isEmpty()){
+            System.out.println("Please input username and password!");
+            return;
+        }
+        String[] userAndPassword = input.split("[\s]+");
+        if(userAndPassword.length!=2){
+            System.out.println("Please input both username and password only!");
+            return;
+        }
         boolean userExists=false;
-        String[] users= ReadFromFile.readFile("src/bg/tu_varna/sit/a1/f23621671/Data/users.txt").split("\n");
+        String[] users= ReadFromFile.readFile("Data/users.txt").split("\n");
 
         for (String user:users) {
             String[] userData=user.split(" ");
@@ -26,7 +42,7 @@ public class UsersAddCommand implements Command{
             }
         }
         if(!userExists){
-            WriteToFile.Write("src/bg/tu_varna/sit/a1/f23621671/Data/users.txt","\n"+userAndPassword[0]+" "+userAndPassword[1]+" "+AccessLevel.USER,true);
+            WriteToFile.Write("./Data/users.txt","\n"+userAndPassword[0]+" "+userAndPassword[1]+" "+AccessLevel.USER,true);
             System.out.println("User added!");
         }
     }

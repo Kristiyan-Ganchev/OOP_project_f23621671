@@ -5,49 +5,69 @@ import bg.tu_varna.sit.a1.f23621671.Commands.*;
 import bg.tu_varna.sit.a1.f23621671.Users.User;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.*;
 
-public class CommandProcessor {//Make it so all commands that can use stream
+public class CommandProcessor {
     public static ArrayList<Book> books = new ArrayList<>();
     public static User currentUser=null;
     public static String currentFile="";
-    public static StringBuilder content=new StringBuilder();
-    private static final Map<String, Command> commandMap=new HashMap<>();
+    private static final Map<CommandEnums, Command> commandMap=new HashMap<>();
     static {
-        commandMap.put("exit",new ExitCommand());
-        commandMap.put("open",new OpenCommand());
-        commandMap.put("close",new CloseCommand());
-        commandMap.put("save", new SaveCommand());
-        commandMap.put("saveas", new SaveAsCommand());
-        commandMap.put("help", new HelpCommand());
-        commandMap.put("login",new LoginCommand());
-        commandMap.put("logout",new LogoutCommand());
-        commandMap.put("booksall",new BooksAllCommand());
-        commandMap.put("booksinfo",new BooksInfo());
-        commandMap.put("booksfind",new BooksFindCommand());
-        commandMap.put("bookssort",new BooksSortCommand());
-        commandMap.put("booksadd",new BooksAddCommand());
-        commandMap.put("booksremove",new BooksRemoveCommand());
-        commandMap.put("usersadd",new UsersAddCommand());
-        commandMap.put("usersremove",new UsersRemoveCommand());
+        commandMap.put(CommandEnums.EXIT,new ExitCommand());
+        commandMap.put(CommandEnums.OPEN, new OpenCommand());
+        commandMap.put(CommandEnums.CLOSE, new CloseCommand());
+        commandMap.put(CommandEnums.SAVE, new SaveCommand());
+        commandMap.put(CommandEnums.SAVE_AS, new SaveAsCommand());
+        commandMap.put(CommandEnums.HELP, new HelpCommand());
+        commandMap.put(CommandEnums.LOGIN, new LoginCommand());
+        commandMap.put(CommandEnums.LOGOUT, new LogoutCommand());
+        commandMap.put(CommandEnums.BOOKS_ALL, new BooksAllCommand());
+        commandMap.put(CommandEnums.BOOKS_INFO, new BooksInfo());
+        commandMap.put(CommandEnums.BOOKS_FIND, new BooksFindCommand());
+        commandMap.put(CommandEnums.BOOKS_SORT, new BooksSortCommand());
+        commandMap.put(CommandEnums.BOOKS_ADD, new BooksAddCommand());
+        commandMap.put(CommandEnums.BOOKS_REMOVE, new BooksRemoveCommand());
+        commandMap.put(CommandEnums.USERS_ADD, new UsersAddCommand());
+        commandMap.put(CommandEnums.USERS_REMOVE, new UsersRemoveCommand());
     }
-
+    public static String toContent(){
+        StringBuilder content=new StringBuilder();
+        for (Book book: CommandProcessor.books) {
+            content.append(book.toWrite());
+        }
+        if (!CommandProcessor.books.isEmpty()) {
+            content.setLength(content.length() - 1);
+        }
+        return content.toString();
+    }
     public static void run() {
         System.out.print ("> ");
         Scanner command= new Scanner(System.in);
-        String[] commandTokens = command.nextLine().toLowerCase().split("[\s]+",2);
+        String input = command.nextLine().trim().toLowerCase();
+        String arguments = "";
+        CommandEnums commandType = null;
 
-        Command cmnd= commandMap.get(commandTokens[0]);
-        if(cmnd!=null){
-            cmnd.runCommand(commandTokens.length > 1 ? commandTokens[1] : "");
-            run();
+        for (CommandEnums type : CommandEnums.values()) {
+            String cmdText = type.getCommandText();
+            if (input.startsWith(cmdText)) {
+                commandType = type;
+                arguments = input.length() > cmdText.length()
+                        ? input.substring(cmdText.length()).trim()
+                        : "";
+                break;
+            }
         }
-        else{
+
+        if (commandType != null) {
+            Command cmd = commandMap.get(commandType);
+            cmd.runCommand(arguments);
+        } else {
             System.out.println("No such command!");
-            run();
         }
+        run();
     }
-    public static Set<Map.Entry<String, Command>> getCommandEntries() {
+    public static Set<Map.Entry<CommandEnums, Command>> getCommandEntries() {
         return Collections.unmodifiableSet(commandMap.entrySet());
     }
 }

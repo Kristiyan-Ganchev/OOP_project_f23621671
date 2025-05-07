@@ -9,12 +9,7 @@ public class SaveCommand implements Command{
     @Override
     public void runCommand(String input) {
         if(!CommandProcessor.currentFile.equals("")){
-            StringBuilder content=new StringBuilder();
-            for (Book book: CommandProcessor.books) {
-                content.append(book.toWrite());
-            }
-            content.setLength(content.length()-1);
-            WriteToFile.Write(CommandProcessor.currentFile,content.toString(),false);
+            WriteToFile.Write(CommandProcessor.currentFile,CommandProcessor.toContent(),false);
             System.out.println("Succesfully saved "+ CommandProcessor.currentFile);}
         else System.out.println("No file loaded!");
     }
