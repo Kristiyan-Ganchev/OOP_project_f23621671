@@ -7,13 +7,15 @@ import bg.tu_varna.sit.a1.f23621671.Users.AccessLevel;
 public class BooksRemoveCommand implements Command{
     @Override
     public void runCommand(String input) {
-        if(CommandProcessor.books.isEmpty()){
+        /*if(CommandProcessor.getBooks().isEmpty()){
             System.out.println("No books in list!");
             return;
-        }
+        }*/
+/*
         if(CommandProcessor.books.removeIf(book -> book.getIsbn().equalsIgnoreCase(input)))
             System.out.println("Book removed!");
         else System.out.println("No such book!");
+*/
 
         if(CommandProcessor.getBooks().removeIf(book -> book.getIsbn().equalsIgnoreCase(input)))
             System.out.println("Book removed!");

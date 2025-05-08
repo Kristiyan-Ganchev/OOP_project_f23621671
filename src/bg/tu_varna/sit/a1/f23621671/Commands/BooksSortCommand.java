@@ -30,10 +30,10 @@ public class BooksSortCommand implements Command{
     }
     @Override
     public void runCommand(String input) {
-        if(CommandProcessor.books.isEmpty()){
+        /*if(CommandProcessor.getBooks().isEmpty()){
             System.out.println("No books in list!");
             return;
-        }
+        }*/
         String[] tokens = input.trim().split("\\s+");
         if (tokens.length == 0) {
             System.out.println("Missing sort criteria!");

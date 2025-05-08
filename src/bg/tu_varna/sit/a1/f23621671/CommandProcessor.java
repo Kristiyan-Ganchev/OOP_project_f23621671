@@ -10,7 +10,7 @@ import java.util.*;
 public class CommandProcessor {
     public static ArrayList<Book> books = new ArrayList<>();
     private static Set<Book> bookSet = new HashSet<>();
-    private static User currentUser=new User(null,null, AccessLevel.NONE);
+    private static User currentUser=new User(null,null, AccessLevel.USER);
     private static String currentFile="";
     private static final Map<CommandEnums, Command> commandMap=new HashMap<>();
     static {
@@ -54,7 +54,7 @@ public class CommandProcessor {
     public static void run() {
         System.out.print("> ");
         Scanner commandLine= new Scanner(System.in);
-        String input = commandLine.nextLine().trim().toLowerCase();
+        String input = commandLine.nextLine().trim().replaceAll("\\s+", " ").toLowerCase();
         String[] splitInput=input.trim().split("\\s+");
 
         String[] argumentsArr;
@@ -66,10 +66,12 @@ public class CommandProcessor {
                     ? input.substring(cmdText.length()).trim()
                     : "";
             Command command = commandMap.get(commandType);
-            int argCount=arguments.trim().isEmpty() ? 0 : arguments.trim().split("\\s+").length;
 
+            int argCount=arguments.trim().isEmpty() ? 0 : arguments.trim().split("\\s+").length;
             if(argCount!=commandType.getArgCount())
                 System.out.println("Not right amount of arguments!\nCommand help: "+commandType.getDescText());
+            if(commandType.isNeedsBooks()&&getBooks().isEmpty())
+                System.out.println("No books loaded!");
             else if(commandType.hasAccess(currentUser.getAccessLevel())){
                 argumentsArr = arguments.split("\\s+");
                 command.runCommand(arguments);
@@ -94,11 +96,13 @@ public class CommandProcessor {
     public static void setCurrentFile(String currentFile) {
         CommandProcessor.currentFile = currentFile;
     }
+
     public static Set<Book> getBooks() {
         return Collections.unmodifiableSet(bookSet);
     }
     public static void addBook(Book book){
-        if (!books.add(book)) {
+        bookSet.add(book);
+        if (!bookSet.add(book)) {
             System.out.println("Book with ISBN " + book.getIsbn() + " already exists!");
         }
     }
