@@ -30,15 +30,10 @@ public class BooksSortCommand implements Command{
     }
     @Override
     public void runCommand(String input) {
-        if (CommandProcessor.currentUser == null) {
-            System.out.println("Not logged in");
+        if(CommandProcessor.books.isEmpty()){
+            System.out.println("No books in list!");
             return;
         }
-        if (CommandProcessor.books.isEmpty()) {
-            System.out.println("No books to sort!");
-            return;
-        }
-
         String[] tokens = input.trim().split("\\s+");
         if (tokens.length == 0) {
             System.out.println("Missing sort criteria!");
@@ -94,9 +89,5 @@ public class BooksSortCommand implements Command{
         while (j < right.size()) result.add(right.get(j++));
 
         return result;
-    }
-    @Override
-    public void description() {
-        System.out.println("books sort");
     }
 }

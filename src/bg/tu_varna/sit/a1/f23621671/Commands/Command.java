@@ -4,5 +4,4 @@ import java.net.URISyntaxException;
 
 public interface Command {
       void runCommand(String input) ;
-      void description();
 }

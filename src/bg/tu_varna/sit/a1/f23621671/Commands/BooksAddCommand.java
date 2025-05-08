@@ -14,14 +14,6 @@ import java.util.Scanner;
 public class BooksAddCommand implements Command{
     @Override
     public void runCommand(String input) {
-        if(CommandProcessor.currentUser==null){
-            System.out.println("Not logged in");
-            return;
-        }
-        else if(CommandProcessor.currentUser.getAccessLevel().equals(AccessLevel.ADMINISTRATOR)){
-            System.out.println("User is not administrator!");
-            return;
-        }
         System.out.println("Please input book title:");
         String title = new Scanner(System.in).nextLine();
         System.out.println("Please input book author name:");
@@ -52,9 +44,6 @@ public class BooksAddCommand implements Command{
             System.out.println("Book successfully added!");
         }
         else System.out.println("Book already in list!");
-    }
-    @Override
-    public void description() {
-        System.out.println("books add");
+        CommandProcessor.addBook(book);
     }
 }

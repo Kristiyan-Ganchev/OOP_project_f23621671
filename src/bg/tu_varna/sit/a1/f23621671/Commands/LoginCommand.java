@@ -15,10 +15,6 @@ import java.util.Scanner;
 public class LoginCommand implements Command{
     @Override
     public void runCommand(String input) {
-        if(CommandProcessor.currentUser!=null ){
-            System.out.println("Already logged in!");
-            return;
-        }
         Scanner scanner=new Scanner(System.in);
         String[] users= ReadFromFile.readFile("Data"+File.separator+"users.txt").split("\n");
         System.out.println("Input username:");
@@ -30,16 +26,12 @@ public class LoginCommand implements Command{
             String[] userData=user.split(" ");
             if(username.equals(userData[0])&&password.equals(userData[1])){
                 System.out.println("Welcome "+username+"!");
-                CommandProcessor.currentUser=new User(username,password, AccessLevel.valueOf(userData[2].trim()));
+                CommandProcessor.setCurrentUser(new User(username,password, AccessLevel.valueOf(userData[2].trim())));
                 break;
             }
         }
-        if(CommandProcessor.currentUser==null)System.out.println("Username or password is wrong.");
-    }
-
-    @Override
-    public void description() {
-        System.out.println("login");
+        if(CommandProcessor.getCurrentUser()==null)
+            System.out.println("Username or password is wrong.");
     }
 }
 

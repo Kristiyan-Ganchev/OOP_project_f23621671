@@ -2,16 +2,16 @@ package bg.tu_varna.sit.a1.f23621671;
 
 import bg.tu_varna.sit.a1.f23621671.Books.Book;
 import bg.tu_varna.sit.a1.f23621671.Commands.*;
+import bg.tu_varna.sit.a1.f23621671.Users.AccessLevel;
 import bg.tu_varna.sit.a1.f23621671.Users.User;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.*;
 
 public class CommandProcessor {
     public static ArrayList<Book> books = new ArrayList<>();
-    public static User currentUser=null;
-    public static String currentFile="";
+    private static Set<Book> bookSet = new HashSet<>();
+    private static User currentUser=new User(null,null, AccessLevel.NONE);
+    private static String currentFile="";
     private static final Map<CommandEnums, Command> commandMap=new HashMap<>();
     static {
         commandMap.put(CommandEnums.EXIT,new ExitCommand());
@@ -23,7 +23,7 @@ public class CommandProcessor {
         commandMap.put(CommandEnums.LOGIN, new LoginCommand());
         commandMap.put(CommandEnums.LOGOUT, new LogoutCommand());
         commandMap.put(CommandEnums.BOOKS_ALL, new BooksAllCommand());
-        commandMap.put(CommandEnums.BOOKS_INFO, new BooksInfo());
+        commandMap.put(CommandEnums.BOOKS_INFO, new BooksInfoCommand());
         commandMap.put(CommandEnums.BOOKS_FIND, new BooksFindCommand());
         commandMap.put(CommandEnums.BOOKS_SORT, new BooksSortCommand());
         commandMap.put(CommandEnums.BOOKS_ADD, new BooksAddCommand());
@@ -41,33 +41,68 @@ public class CommandProcessor {
         }
         return content.toString();
     }
-    public static void run() {
-        System.out.print ("> ");
-        Scanner command= new Scanner(System.in);
-        String input = command.nextLine().trim().toLowerCase();
-        String arguments = "";
-        CommandEnums commandType = null;
-
-        for (CommandEnums type : CommandEnums.values()) {
-            String cmdText = type.getCommandText();
-            if (input.startsWith(cmdText)) {
-                commandType = type;
-                arguments = input.length() > cmdText.length()
-                        ? input.substring(cmdText.length()).trim()
-                        : "";
-                break;
-            }
+    public static String booksToContent(){
+        StringBuilder content=new StringBuilder();
+        for (Book book: CommandProcessor.bookSet) {
+            content.append(book.toWrite());
         }
+        if (!CommandProcessor.bookSet.isEmpty()) {
+            content.setLength(content.length() - 1);
+        }
+        return content.toString();
+    }
+    public static void run() {
+        System.out.print("> ");
+        Scanner commandLine= new Scanner(System.in);
+        String input = commandLine.nextLine().trim().toLowerCase();
+        String[] splitInput=input.trim().split("\\s+");
+
+        String[] argumentsArr;
+        CommandEnums commandType=CommandEnums.getCommandEnum(splitInput);
 
         if (commandType != null) {
-            Command cmd = commandMap.get(commandType);
-            cmd.runCommand(arguments);
+            String cmdText=(CommandEnums.getCommandEnum(splitInput).getCommandText());
+            String arguments=input.length() > cmdText.length()
+                    ? input.substring(cmdText.length()).trim()
+                    : "";
+            Command command = commandMap.get(commandType);
+            int argCount=arguments.trim().isEmpty() ? 0 : arguments.trim().split("\\s+").length;
+
+            if(argCount!=commandType.getArgCount())
+                System.out.println("Not right amount of arguments!\nCommand help: "+commandType.getDescText());
+            else if(commandType.hasAccess(currentUser.getAccessLevel())){
+                argumentsArr = arguments.split("\\s+");
+                command.runCommand(arguments);
+            }
         } else {
             System.out.println("No such command!");
         }
         run();
     }
-    public static Set<Map.Entry<CommandEnums, Command>> getCommandEntries() {
-        return Collections.unmodifiableSet(commandMap.entrySet());
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public static String getCurrentFile() {
+        return currentFile;
+    }
+
+    public static void setCurrentUser(User currentUser) {
+        CommandProcessor.currentUser = currentUser;
+    }
+
+    public static void setCurrentFile(String currentFile) {
+        CommandProcessor.currentFile = currentFile;
+    }
+    public static Set<Book> getBooks() {
+        return Collections.unmodifiableSet(bookSet);
+    }
+    public static void addBook(Book book){
+        if (!books.add(book)) {
+            System.out.println("Book with ISBN " + book.getIsbn() + " already exists!");
+        }
+    }
+    public static void clearBooks() {
+        bookSet.clear();
     }
 }

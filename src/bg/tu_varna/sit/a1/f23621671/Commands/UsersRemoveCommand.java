@@ -10,14 +10,6 @@ import java.util.Arrays;
 public class UsersRemoveCommand implements Command{
     @Override
     public void runCommand(String input) {
-        if(CommandProcessor.currentUser==null){
-            System.out.println("Not logged in");
-            return;
-        }
-        else if(CommandProcessor.currentUser.getAccessLevel().equals(AccessLevel.ADMINISTRATOR)){
-            System.out.println("User is not administrator!");
-            return;
-        }
         String[] users= ReadFromFile.readFile("Data/users.txt").split("\n");
         StringBuilder tempFile = new StringBuilder();
         for (String user:users) {
@@ -28,10 +20,5 @@ public class UsersRemoveCommand implements Command{
         }
         WriteToFile.Write("Data/users.txt",tempFile.toString(),false);
         System.out.println("User removed!");
-    }
-
-    @Override
-    public void description() {
-        System.out.println("users remove");
     }
 }

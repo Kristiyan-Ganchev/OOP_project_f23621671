@@ -6,10 +6,6 @@ import bg.tu_varna.sit.a1.f23621671.CommandProcessor;
 public class BooksFindCommand implements Command{
     @Override
     public void runCommand(String input) {
-        if(CommandProcessor.currentUser==null){
-            System.out.println("Not logged in");
-            return;
-        }
         if(CommandProcessor.books.isEmpty()){
             System.out.println("No books in list!");
             return;
@@ -37,10 +33,5 @@ public class BooksFindCommand implements Command{
             }
         }
         else System.out.println("No such option!");
-    }
-
-    @Override
-    public void description() {
-        System.out.println("books find");
     }
 }

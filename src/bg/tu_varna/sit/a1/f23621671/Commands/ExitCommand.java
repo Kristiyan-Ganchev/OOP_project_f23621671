@@ -6,8 +6,4 @@ public class ExitCommand implements Command{
         System.out.print("Exiting the program...");
         System.exit(0);
     }
-    @Override
-    public void description(){
-        System.out.println("exit\t\t\t  exists the program");
-    }
 }

@@ -8,13 +8,9 @@ public class SaveCommand implements Command{
 
     @Override
     public void runCommand(String input) {
-        if(!CommandProcessor.currentFile.equals("")){
-            WriteToFile.Write(CommandProcessor.currentFile,CommandProcessor.toContent(),false);
-            System.out.println("Succesfully saved "+ CommandProcessor.currentFile);}
+        if(!CommandProcessor.getCurrentFile().equals("")){
+            WriteToFile.Write(CommandProcessor.getCurrentFile(),CommandProcessor.toContent(),false);
+            System.out.println("Succesfully saved "+ CommandProcessor.getCurrentFile());}
         else System.out.println("No file loaded!");
-    }
-    @Override
-    public void description(){
-        System.out.println("save\t\t\t  saves the currently open file");
     }
 }

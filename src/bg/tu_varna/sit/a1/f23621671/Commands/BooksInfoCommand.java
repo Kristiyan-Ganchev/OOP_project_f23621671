@@ -3,25 +3,21 @@ package bg.tu_varna.sit.a1.f23621671.Commands;
 import bg.tu_varna.sit.a1.f23621671.Books.Book;
 import bg.tu_varna.sit.a1.f23621671.CommandProcessor;
 
-public class BooksInfo implements Command{
+public class BooksInfoCommand implements Command{
     @Override
     public void runCommand(String input) {
-        if(CommandProcessor.currentUser==null){
-            System.out.println("Not logged in");
-            return;
-        }
         if(CommandProcessor.books.isEmpty()){
             System.out.println("No books in list!");
             return;
         }
         for (Book book: CommandProcessor.books)
         {
-            if(book.getIsbn().equals(input)) System.out.println(book.toString());
+            if(book.getIsbn().equalsIgnoreCase(input)) System.out.println(book.toString());
         }
-    }
-
-    @Override
-    public void description() {
-        System.out.println("books info");
+        for (Book book: CommandProcessor.getBooks())
+        {
+            if(book.getIsbn().equalsIgnoreCase(input))
+                System.out.println(book.toString());
+        }
     }
 }
