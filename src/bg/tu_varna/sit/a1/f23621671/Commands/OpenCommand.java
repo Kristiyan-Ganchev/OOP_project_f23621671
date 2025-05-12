@@ -13,17 +13,17 @@ import java.util.Locale;
 
 public class OpenCommand implements Command{
     @Override
-    public void runCommand(String input) {
+    public void runCommand(String input[]) {
         String[] books = null;
         if(!CommandProcessor.getCurrentFile().isEmpty()){
             System.out.println("File already open!");
             return;
         }
-        if(Files.exists(Path.of(input))){
-            books=ReadFromFile.readFile(input).split("\n");
+        if(Files.exists(Path.of(input[0]))){
+            books=ReadFromFile.readFile(input[0]).split("\n");
         }
         else {
-            CreateFile.createFile(input);
+            CreateFile.createFile(input[0]);
             return;
         }
         if(books[0].trim().length()==0) {
@@ -31,14 +31,7 @@ public class OpenCommand implements Command{
             return;
         }
         for (String book: books) {
-              String[] bookData= book.split(";");
-//            CommandProcessor.books.add(new Book.BookBuilder(bookData[0],bookData[1], BookGenres.valueOf(bookData[2].toUpperCase(Locale.ROOT)),bookData[3])
-//                    .withBookDescription(bookData[4])
-//                    .withBookYear((Integer.parseInt(bookData[5])))
-//                    .witTags(bookData[6])
-//                    .withRating(Float.parseFloat(bookData[7]))
-//                    .build());
-
+            String[] bookData= book.split(";");
             CommandProcessor.addBook(new Book.BookBuilder(bookData[0],bookData[1], BookGenres.valueOf(bookData[2].toUpperCase(Locale.ROOT)),bookData[3])
                     .withBookDescription(bookData[4])
                     .withBookYear((Integer.parseInt(bookData[5])))
@@ -46,8 +39,8 @@ public class OpenCommand implements Command{
                     .withRating(Float.parseFloat(bookData[7]))
                     .build());
         }
-        CommandProcessor.setCurrentFile(input);
-        File file =new File(input);
+        CommandProcessor.setCurrentFile(input[0]);
+        File file =new File(input[0]);
         System.out.println("Successfuly opened "+file.getName());
     }
 }

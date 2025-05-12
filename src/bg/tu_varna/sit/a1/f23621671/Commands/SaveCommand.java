@@ -7,10 +7,8 @@ import bg.tu_varna.sit.a1.f23621671.Files.WriteToFile;
 public class SaveCommand implements Command{
 
     @Override
-    public void runCommand(String input) {
-        if(!CommandProcessor.getCurrentFile().equals("")){
+    public void runCommand(String input[]) {
             WriteToFile.Write(CommandProcessor.getCurrentFile(),CommandProcessor.toContent(),false);
-            System.out.println("Succesfully saved "+ CommandProcessor.getCurrentFile());}
-        else System.out.println("No file loaded!");
+            System.out.println("Succesfully saved "+ CommandProcessor.getCurrentFile());
     }
 }

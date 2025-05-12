@@ -12,29 +12,20 @@ import java.util.Scanner;
 
 public class UsersAddCommand implements Command{
     @Override
-    public void runCommand(String input) {
-        if(input.isEmpty()){
-            System.out.println("Please input username and password!");
-            return;
-        }
-        String[] userAndPassword = input.split("[\s]+");
-        if(userAndPassword.length!=2){
-            System.out.println("Please input both username and password only!");
-            return;
-        }
+    public void runCommand(String input[]) {
         boolean userExists=false;
         String[] users= ReadFromFile.readFile("Data/users.txt").split("\n");
 
         for (String user:users) {
             String[] userData=user.split(" ");
-            if(userAndPassword[0].equals(userData[0])&&userAndPassword[1].equals(userData[1])){
+            if(input[0].equals(userData[0])&&input[1].equals(userData[1])){
                 System.out.println("User already exists");
                 userExists=true;
                 break;
             }
         }
         if(!userExists){
-            WriteToFile.Write("./Data/users.txt","\n"+userAndPassword[0]+" "+userAndPassword[1]+" "+AccessLevel.USER,true);
+            WriteToFile.Write("./Data/users.txt","\n"+input[0]+" "+input[1]+" "+AccessLevel.USER,true);
             System.out.println("User added!");
         }
     }

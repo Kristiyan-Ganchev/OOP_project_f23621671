@@ -9,12 +9,12 @@ import java.util.Arrays;
 
 public class UsersRemoveCommand implements Command{
     @Override
-    public void runCommand(String input) {
+    public void runCommand(String input[]) {
         String[] users= ReadFromFile.readFile("Data/users.txt").split("\n");
         StringBuilder tempFile = new StringBuilder();
         for (String user:users) {
             String[] userData=user.split(" ");
-            if(!(input.equals(userData[0]))){
+            if(!(input[0].equals(userData[0]))){
                 tempFile.append(user+"\n");
             }
         }

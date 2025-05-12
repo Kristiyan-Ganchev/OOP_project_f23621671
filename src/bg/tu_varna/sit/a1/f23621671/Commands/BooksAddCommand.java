@@ -2,6 +2,7 @@ package bg.tu_varna.sit.a1.f23621671.Commands;
 
 import bg.tu_varna.sit.a1.f23621671.Books.Book;
 import bg.tu_varna.sit.a1.f23621671.Books.BookGenres;
+import bg.tu_varna.sit.a1.f23621671.Books.Library;
 import bg.tu_varna.sit.a1.f23621671.CommandProcessor;
 import bg.tu_varna.sit.a1.f23621671.Files.ErrorLogger;
 import bg.tu_varna.sit.a1.f23621671.Files.ReadFromFile;
@@ -13,13 +14,14 @@ import java.util.Scanner;
 
 public class BooksAddCommand implements Command{
     @Override
-    public void runCommand(String input) {
+    public void runCommand(String input[]) {
+        Scanner scanner= new Scanner(System.in);
         System.out.println("Please input book title:");
-        String title = new Scanner(System.in).nextLine();
+        String title = scanner.nextLine();
         System.out.println("Please input book author name:");
-        String author = new Scanner(System.in).nextLine();
+        String author = scanner.nextLine();
         System.out.println("Please input book genre:");
-        String genre = new Scanner(System.in).nextLine().toUpperCase(Locale.ROOT);
+        String genre = scanner.nextLine().toUpperCase(Locale.ROOT);
         BookGenres bookGenre;
         try {
             bookGenre = BookGenres.valueOf(genre);
@@ -29,21 +31,20 @@ public class BooksAddCommand implements Command{
             return;
         }
         System.out.println("Please input book description:");
-        String description = new Scanner(System.in).nextLine();
+        String description = scanner.nextLine();
         System.out.println("Please input book year:");
-        String year = new Scanner(System.in).nextLine();
+        String year = scanner.nextLine();
         System.out.println("Please input book tags:");
-        String tags = new Scanner(System.in).nextLine();
+        String tags = scanner.nextLine();
         System.out.println("Please input book rating:");
-        String rating = new Scanner(System.in).nextLine();
+        String rating = scanner.nextLine();
         System.out.println("Please input book isbn:");
-        String isbn = new Scanner(System.in).nextLine();
+        String isbn = scanner.nextLine();
         Book book=new Book.BookBuilder(author,title,bookGenre,isbn).withBookDescription(description).withBookYear(Integer.parseInt(year)).withRating(Float.parseFloat(rating)).witTags(tags).build();
-        if(!CommandProcessor.books.stream().anyMatch(book1->book1.getIsbn().equalsIgnoreCase(book.getIsbn()))){
-            CommandProcessor.books.add(book);
+        if(!Library.getInstance().getBooks().contains(book)){
+            Library.getInstance().addBook(book);
             System.out.println("Book successfully added!");
         }
         else System.out.println("Book already in list!");
-        CommandProcessor.addBook(book);
     }
 }

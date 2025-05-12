@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class LoginCommand implements Command{
     @Override
-    public void runCommand(String input) {
+    public void runCommand(String input[]) {
         if (!CommandProcessor.getCurrentUser().getAccessLevel().equals(AccessLevel.NONE)) {
             System.out.println("Already logged in!");
             return;
@@ -34,7 +34,7 @@ public class LoginCommand implements Command{
                 break;
             }
         }
-        if(CommandProcessor.getCurrentUser()==null)
+        if(CommandProcessor.getCurrentUser().getAccessLevel().equals(AccessLevel.NONE))
             System.out.println("Username or password is wrong.");
     }
 }

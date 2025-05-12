@@ -8,28 +8,23 @@ import java.util.function.Predicate;
 
 public class BooksFindCommand implements Command{
     @Override
-    public void runCommand(String input) {
-       /* if(CommandProcessor.getBooks().isEmpty()){
-            System.out.println("No books in list!");
-            return;
-        }*/
-        String[] option=input.split(" ",2);
+    public void runCommand(String input[]) {
         Predicate<Book> filter;
-        switch (option[1].toLowerCase(Locale.ROOT)){
+        switch (input[0].toLowerCase(Locale.ROOT)){
             case "author":{
-                    filter=b -> b.getAuthorName().toLowerCase().contains(option[1]);
+                    filter=b -> b.getAuthorName().toLowerCase().contains(input[1]);
                 break;
             }
             case "title":{
-                filter=b -> b.getBookTitle().toLowerCase().contains(option[1]);
+                filter=b -> b.getBookTitle().toLowerCase().contains(input[1]);
                 break;
             }
             case "tag":{
-                filter=b -> b.getTags().toLowerCase().contains(option[1]);
+                filter=b -> b.getTags().toLowerCase().contains(input[1]);
                 break;
             }
             default:
-                System.out.println("No such search field: " + option[1]);
+                System.out.println("No such search field: " + input[1]);
                 return;
         }
         boolean found = CommandProcessor.getBooks().stream()

@@ -29,24 +29,14 @@ public class BooksSortCommand implements Command{
         return asc ? comp : comp.reversed();
     }
     @Override
-    public void runCommand(String input) {
-        /*if(CommandProcessor.getBooks().isEmpty()){
-            System.out.println("No books in list!");
-            return;
-        }*/
-        String[] tokens = input.trim().split("\\s+");
-        if (tokens.length == 0) {
-            System.out.println("Missing sort criteria!");
-            return;
-        }
-
-        String criteria = tokens[0];
+    public void runCommand(String input[]) {
+        String criteria = input[0];
         boolean asc = true;
 
-        if (tokens.length > 1) {
-            if (tokens[1].equalsIgnoreCase("desc")) {
+        if (input.length > 1) {
+            if (input[1].equalsIgnoreCase("desc")) {
                 asc = false;
-            } else if (!tokens[1].equalsIgnoreCase("asc")) {
+            } else if (!input[1].equalsIgnoreCase("asc")) {
                 System.out.println("Invalid order! Use 'asc' or 'desc'.");
                 return;
             }
@@ -58,8 +48,11 @@ public class BooksSortCommand implements Command{
             return;
         }
 
-        List<Book> sorted = mergeSort(new ArrayList<>(CommandProcessor.books), comparator);
-        CommandProcessor.books = new ArrayList<>(sorted);
+        List<Book> sorted = mergeSort(new ArrayList<>(CommandProcessor.getBooks()), comparator);
+        for (Book book: sorted
+             ) {
+            System.out.println(book);
+        }
 
         System.out.println("Books sorted by " + criteria + " in " + (asc ? "ascending" : "descending") + " order.");
     }
