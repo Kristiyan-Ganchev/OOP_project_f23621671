@@ -1,5 +1,2 @@
 admin admin ADMINISTRATOR
 user user USER
-potrebitel parola USER
-
-a a USER

@@ -1,7 +1,7 @@
 package bg.tu_varna.sit.a1.f23621671.Commands;
 
 import bg.tu_varna.sit.a1.f23621671.Books.Book;
-import bg.tu_varna.sit.a1.f23621671.CommandProcessor;
+import bg.tu_varna.sit.a1.f23621671.Books.Library;
 
 import java.util.Locale;
 import java.util.function.Predicate;
@@ -27,7 +27,7 @@ public class BooksFindCommand implements Command{
                 System.out.println("No such search field: " + input[1]);
                 return;
         }
-        boolean found = CommandProcessor.getBooks().stream()
+        boolean found = Library.getInstance().getBooks().stream()
                 .filter(filter)
                 .peek(book -> System.out.println("Book found!\n" + book))
                 .count() > 0;

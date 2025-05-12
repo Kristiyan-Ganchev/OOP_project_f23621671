@@ -1,17 +1,11 @@
 package bg.tu_varna.sit.a1.f23621671;
 
-import bg.tu_varna.sit.a1.f23621671.Books.Book;
 import bg.tu_varna.sit.a1.f23621671.Books.Library;
 import bg.tu_varna.sit.a1.f23621671.Commands.*;
-import bg.tu_varna.sit.a1.f23621671.Users.AccessLevel;
-import bg.tu_varna.sit.a1.f23621671.Users.User;
 
 import java.util.*;
 
 public class CommandProcessor {
-    private static Set<Book> bookSet = new HashSet<>();
-    private static User currentUser=new User(null,null, AccessLevel.USER);
-    private static String currentFile="";
     private static final Map<CommandEnums, Command> commandMap=new HashMap<>();
     static {
         commandMap.put(CommandEnums.EXIT,new ExitCommand());
@@ -31,16 +25,6 @@ public class CommandProcessor {
         commandMap.put(CommandEnums.USERS_ADD, new UsersAddCommand());
         commandMap.put(CommandEnums.USERS_REMOVE, new UsersRemoveCommand());
     }
-    public static String toContent(){
-        StringBuilder content=new StringBuilder();
-        for (Book book: CommandProcessor.getBooks()) {
-            content.append(book.toWrite());
-        }
-        if (!CommandProcessor.bookSet.isEmpty()) {
-            content.setLength(content.length() - 1);
-        }
-        return content.toString();
-    }
     public static void run() {
         System.out.print("> ");
         Scanner commandLine= new Scanner(System.in);
@@ -59,9 +43,9 @@ public class CommandProcessor {
             int argCount=arguments.trim().isEmpty() ? 0 : arguments.trim().split("\\s+",commandType.getArgCount()).length;
             if(argCount!=commandType.getArgCount())
                 System.out.println("Not right amount of arguments!\nCommand help: "+commandType.getDescText());
-            else if(commandType.isNeedsBooks()&&getBooks().isEmpty())
+            else if(commandType.isNeedsBooks()&&Library.getInstance().getBooks().isEmpty())
                 System.out.println("No books loaded!");
-            else if(commandType.hasAccess(currentUser.getAccessLevel())){
+            else if(commandType.hasAccess(CurrentData.getInstance().getCurrentUser().getAccessLevel())){
                 argumentsArr = arguments.split("\\s+",commandType.getArgCount());
                 command.runCommand(argumentsArr);
             }
@@ -70,38 +54,5 @@ public class CommandProcessor {
             System.out.println("No such command!");
         }
         run();
-    }
-    public static User getCurrentUser() {
-        return currentUser;
-    }
-
-    public static String getCurrentFile() {
-        return currentFile;
-    }
-
-    public static void setCurrentUser(User currentUser) {
-        CommandProcessor.currentUser = currentUser;
-    }
-
-    public static void setCurrentFile(String currentFile) {
-        CommandProcessor.currentFile = currentFile;
-    }
-
-    public static Set<Book> getBooks() {
-        return Collections.unmodifiableSet(bookSet);
-    }
-    public static void addBook(Book book){
-        if (!bookSet.add(book)) {
-            System.out.println("Book with ISBN " + book.getIsbn() + " already exists!");
-        }
-    }
-    public static void removeBook(String isbn){
-        if (bookSet.removeIf(book -> book.getIsbn().equalsIgnoreCase(isbn))) {
-            System.out.println("Book removed!");
-        }
-        else System.out.println("Book not found");
-    }
-    public static void clearBooks() {
-        bookSet.clear();
     }
 }

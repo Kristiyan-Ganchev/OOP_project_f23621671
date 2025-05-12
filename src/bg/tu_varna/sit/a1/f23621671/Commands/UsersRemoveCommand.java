@@ -1,11 +1,7 @@
 package bg.tu_varna.sit.a1.f23621671.Commands;
 
-import bg.tu_varna.sit.a1.f23621671.CommandProcessor;
 import bg.tu_varna.sit.a1.f23621671.Files.WriteToFile;
 import bg.tu_varna.sit.a1.f23621671.Files.ReadFromFile;
-import bg.tu_varna.sit.a1.f23621671.Users.AccessLevel;
-
-import java.util.Arrays;
 
 public class UsersRemoveCommand implements Command{
     @Override

@@ -8,7 +8,7 @@ import java.util.Map;
 public enum CommandEnums {
     EXIT("exit", 0, "exit\t\t\t  exists the program",AccessLevel.NONE, false),
     OPEN("open", 1,"open <file>\t\t  opens <file>" ,AccessLevel.NONE, false),
-    CLOSE("close", 0, "close\t\t\t  closes currently opened file",AccessLevel.NONE, false),
+    CLOSE("close", 0, "close\t\t\t  closes currently opened file",AccessLevel.NONE, true),
     SAVE("save", 0, "save\t\t\t  saves the currently open file",AccessLevel.NONE, true),
     SAVE_AS("save as", 1, "save as <file>\t  saves the currently open file in <file>",AccessLevel.NONE, true),
     HELP("help", 0, "help\t\t\t  prints this information",AccessLevel.NONE, false),

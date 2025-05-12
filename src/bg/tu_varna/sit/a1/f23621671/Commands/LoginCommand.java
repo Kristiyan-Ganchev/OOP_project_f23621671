@@ -1,21 +1,17 @@
 package bg.tu_varna.sit.a1.f23621671.Commands;
-
-import bg.tu_varna.sit.a1.f23621671.CommandProcessor;
+import bg.tu_varna.sit.a1.f23621671.CurrentData;
 import bg.tu_varna.sit.a1.f23621671.Files.ReadFromFile;
 import bg.tu_varna.sit.a1.f23621671.Users.AccessLevel;
 import bg.tu_varna.sit.a1.f23621671.Users.User;
-import com.sun.tools.javac.Main;
 
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Scanner;
 
 public class LoginCommand implements Command{
     @Override
     public void runCommand(String input[]) {
-        if (!CommandProcessor.getCurrentUser().getAccessLevel().equals(AccessLevel.NONE)) {
+        if (!CurrentData.getInstance().getCurrentUser().getAccessLevel().equals(AccessLevel.NONE)) {
             System.out.println("Already logged in!");
             return;
         }
@@ -30,11 +26,11 @@ public class LoginCommand implements Command{
             String[] userData=user.split(" ");
             if(username.equals(userData[0])&&password.equals(userData[1])){
                 System.out.println("Welcome "+username+"!");
-                CommandProcessor.setCurrentUser(new User(username,password, AccessLevel.valueOf(userData[2].trim())));
+                CurrentData.getInstance().setCurrentUser(new User(username,password, AccessLevel.valueOf(userData[2].trim())));
                 break;
             }
         }
-        if(CommandProcessor.getCurrentUser().getAccessLevel().equals(AccessLevel.NONE))
+        if(CurrentData.getInstance().getCurrentUser().getAccessLevel().equals(AccessLevel.NONE))
             System.out.println("Username or password is wrong.");
     }
 }

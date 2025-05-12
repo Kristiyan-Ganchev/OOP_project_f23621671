@@ -1,14 +1,8 @@
 package bg.tu_varna.sit.a1.f23621671.Commands;
 
-import bg.tu_varna.sit.a1.f23621671.CommandProcessor;
 import bg.tu_varna.sit.a1.f23621671.Files.ReadFromFile;
 import bg.tu_varna.sit.a1.f23621671.Files.WriteToFile;
 import bg.tu_varna.sit.a1.f23621671.Users.AccessLevel;
-import bg.tu_varna.sit.a1.f23621671.Users.User;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
 
 public class UsersAddCommand implements Command{
     @Override

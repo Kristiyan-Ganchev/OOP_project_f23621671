@@ -33,4 +33,14 @@ public class Library {
     public  void clearBooks() {
         bookSet.clear();
     }
+    public static String toContent(){
+        StringBuilder content=new StringBuilder();
+        for (Book book: getInstance().getBooks()) {
+            content.append(book.toWrite());
+        }
+        if (Library.getInstance().getBooks().isEmpty()) {
+            content.setLength(content.length() - 1);
+        }
+        return content.toString();
+    }
 }

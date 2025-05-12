@@ -1,15 +1,13 @@
 package bg.tu_varna.sit.a1.f23621671.Commands;
 
-import bg.tu_varna.sit.a1.f23621671.CommandProcessor;
+import bg.tu_varna.sit.a1.f23621671.Books.Library;
+import bg.tu_varna.sit.a1.f23621671.CurrentData;
 
 public class CloseCommand implements Command{
     @Override
     public void runCommand(String input[]) {
-        if(!CommandProcessor.getCurrentFile().equals("")){
-            CommandProcessor.clearBooks();
-            System.out.println("Successfully closed "+CommandProcessor.getCurrentFile());
-            CommandProcessor.setCurrentFile("");
-        }
-        else System.out.println("No file loaded!");
+            Library.getInstance().clearBooks();
+            System.out.println("Successfully closed "+CurrentData.getInstance().getCurrentFile());
+            CurrentData.getInstance().setCurrentFile("");
     }
 }

@@ -1,7 +1,7 @@
 package bg.tu_varna.sit.a1.f23621671.Commands;
 
 import bg.tu_varna.sit.a1.f23621671.Books.Book;
-import bg.tu_varna.sit.a1.f23621671.CommandProcessor;
+import bg.tu_varna.sit.a1.f23621671.Books.Library;
 
 import java.util.*;
 
@@ -48,7 +48,7 @@ public class BooksSortCommand implements Command{
             return;
         }
 
-        List<Book> sorted = mergeSort(new ArrayList<>(CommandProcessor.getBooks()), comparator);
+        List<Book> sorted = mergeSort(new ArrayList<>(Library.getInstance().getBooks()), comparator);
         for (Book book: sorted
              ) {
             System.out.println(book);
