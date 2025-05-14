@@ -4,6 +4,8 @@ import bg.tu_varna.sit.a1.f23621671.Books.Book;
 import bg.tu_varna.sit.a1.f23621671.Books.BookGenres;
 import bg.tu_varna.sit.a1.f23621671.Books.Library;
 import bg.tu_varna.sit.a1.f23621671.CurrentData;
+import bg.tu_varna.sit.a1.f23621671.Exceptions.FileStateException;
+import bg.tu_varna.sit.a1.f23621671.Exceptions.NoDataException;
 import bg.tu_varna.sit.a1.f23621671.Files.CreateFile;
 import bg.tu_varna.sit.a1.f23621671.Files.ReadFromFile;
 
@@ -14,10 +16,9 @@ import java.util.Locale;
 
 public class OpenCommand implements Command{
     @Override
-    public void runCommand(String input[]) {
+    public void runCommand(String input[]) throws NoDataException, FileStateException {
         if(!CurrentData.getInstance().getCurrentFile().isEmpty()){
-            System.out.println("File already open!");
-            return;
+            throw new FileStateException("File already open!");
         }
         String[] books = null;
         if(Files.exists(Path.of(input[0]))){
@@ -28,8 +29,7 @@ public class OpenCommand implements Command{
             return;
         }
         if(books[0].trim().length()==0) {
-            System.out.println("No books in system!");
-            return;
+            throw new NoDataException("No books in system!");
         }
         for (String book: books) {
             String[] bookData= book.split(";");

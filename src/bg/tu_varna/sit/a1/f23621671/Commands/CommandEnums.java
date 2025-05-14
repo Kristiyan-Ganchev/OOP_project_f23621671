@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.a1.f23621671.Commands;
 
+import bg.tu_varna.sit.a1.f23621671.Exceptions.AccessDeniedException;
 import bg.tu_varna.sit.a1.f23621671.Users.AccessLevel;
 
 import java.util.HashMap;
@@ -17,7 +18,7 @@ public enum CommandEnums {
     BOOKS_ALL("books all", 0, "books all",AccessLevel.USER, true),
     BOOKS_INFO("books info", 1, "books info",AccessLevel.USER, true),
     BOOKS_FIND("books find", 2, "books find",AccessLevel.USER, true),
-    BOOKS_SORT("books sort", 2, "books sort",AccessLevel.USER, true),
+    BOOKS_SORT("books sort", 1, "books sort",AccessLevel.USER, true),
     BOOKS_ADD("books add", 0, "books add",AccessLevel.ADMINISTRATOR, false),
     BOOKS_REMOVE("books remove", 1, "books remove",AccessLevel.ADMINISTRATOR, true),
     USERS_ADD("users add", 2, "users add",AccessLevel.ADMINISTRATOR, false),
@@ -69,13 +70,12 @@ public enum CommandEnums {
             return commandLookup.get(commandText[0]);
         return null;
     }
-    public boolean hasAccess(AccessLevel userAccessLevel){
+    public boolean hasAccess(AccessLevel userAccessLevel) throws AccessDeniedException {
         if(userAccessLevel.equals(AccessLevel.ADMINISTRATOR)||this.getAccessLevel().equals(AccessLevel.NONE))
             return true;
         else if(userAccessLevel.equals(this.getAccessLevel())){
             return true;
         }
-        System.out.println("You need to be "+(this.getAccessLevel() == AccessLevel.NONE ? "logged out" : "a "+this.getAccessLevel()) +" to use command!");
-        return false;
+        throw new AccessDeniedException("You need to be "+(this.getAccessLevel() == AccessLevel.NONE ? "logged out" : "a "+this.getAccessLevel()) +" to use command!");
     }
 }

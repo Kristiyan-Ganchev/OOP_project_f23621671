@@ -2,6 +2,10 @@ package bg.tu_varna.sit.a1.f23621671;
 
 import bg.tu_varna.sit.a1.f23621671.Books.Library;
 import bg.tu_varna.sit.a1.f23621671.Commands.*;
+import bg.tu_varna.sit.a1.f23621671.Exceptions.AccessDeniedException;
+import bg.tu_varna.sit.a1.f23621671.Exceptions.InvalidCommandArgumentsException;
+import bg.tu_varna.sit.a1.f23621671.Exceptions.InvalidCommandException;
+import bg.tu_varna.sit.a1.f23621671.Exceptions.NoDataException;
 
 import java.util.*;
 
@@ -25,34 +29,39 @@ public class CommandProcessor {
         commandMap.put(CommandEnums.USERS_ADD, new UsersAddCommand());
         commandMap.put(CommandEnums.USERS_REMOVE, new UsersRemoveCommand());
     }
-    public static void run() {
-        System.out.print("> ");
-        Scanner commandLine= new Scanner(System.in);
-        String input = commandLine.nextLine().trim().replaceAll("\\s+", " ").toLowerCase();
-        String[] splitInput=input.trim().split("\\s+");
+    public static void run() throws AccessDeniedException, NoDataException, InvalidCommandArgumentsException, InvalidCommandException {
+        while(true) {
+            try {
+                System.out.print("> ");
+                Scanner commandLine = new Scanner(System.in);
+                String input = commandLine.nextLine().trim().replaceAll("\\s+", " ").toLowerCase();
+                String[] splitInput = input.trim().split("\\s+");
 
-        String[] argumentsArr;
-        CommandEnums commandType=CommandEnums.getCommandEnum(splitInput);
+                String[] argumentsArr;
+                CommandEnums commandType = CommandEnums.getCommandEnum(splitInput);
 
-        if (commandType != null) {
-            String cmdText=(commandType.getCommandText());
-            String arguments=input.length() > cmdText.length()
-                    ? input.substring(cmdText.length()).trim()
-                    : "";
-            Command command = commandMap.get(commandType);
-            int argCount=arguments.trim().isEmpty() ? 0 : arguments.trim().split("\\s+",commandType.getArgCount()).length;
-            if(argCount!=commandType.getArgCount())
-                System.out.println("Not right amount of arguments!\nCommand help: "+commandType.getDescText());
-            else if(commandType.isNeedsBooks()&&Library.getInstance().getBooks().isEmpty())
-                System.out.println("No books loaded!");
-            else if(commandType.hasAccess(CurrentData.getInstance().getCurrentUser().getAccessLevel())){
-                argumentsArr = arguments.split("\\s+",commandType.getArgCount());
-                command.runCommand(argumentsArr);
+                if (commandType != null) {
+                    String cmdText = (commandType.getCommandText());
+                    String arguments = input.length() > cmdText.length()
+                            ? input.substring(cmdText.length()).trim()
+                            : "";
+                    Command command = commandMap.get(commandType);
+                    int argCount = arguments.trim().isEmpty() ? 0 : arguments.trim().split("\\s+", commandType.getArgCount()).length;
+                    if (argCount != commandType.getArgCount())
+                        throw new InvalidCommandArgumentsException("Argument count not right! help with command: " + commandType.getDescText());
+                    else if (commandType.isNeedsBooks() && Library.getInstance().getBooks().isEmpty())
+                        throw new NoDataException("No books loaded!");
+                    else if (commandType.hasAccess(CurrentData.getInstance().getCurrentUser().getAccessLevel())) {
+                        argumentsArr = arguments.split("\\s+", commandType.getArgCount());
+                        command.runCommand(argumentsArr);
+                    }
+                } else {
+                    throw new InvalidCommandException("No such command!");
+                }
+            }
+            catch (Exception e){
+                System.out.println("Error: "+e.getMessage());
             }
         }
-        else {
-            System.out.println("No such command!");
-        }
-        run();
     }
 }

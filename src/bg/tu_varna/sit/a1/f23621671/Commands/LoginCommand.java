@@ -1,5 +1,7 @@
 package bg.tu_varna.sit.a1.f23621671.Commands;
 import bg.tu_varna.sit.a1.f23621671.CurrentData;
+import bg.tu_varna.sit.a1.f23621671.Exceptions.AccessDeniedException;
+import bg.tu_varna.sit.a1.f23621671.Exceptions.UserNotFoundException;
 import bg.tu_varna.sit.a1.f23621671.Files.ReadFromFile;
 import bg.tu_varna.sit.a1.f23621671.Users.AccessLevel;
 import bg.tu_varna.sit.a1.f23621671.Users.User;
@@ -10,10 +12,9 @@ import java.util.Scanner;
 
 public class LoginCommand implements Command{
     @Override
-    public void runCommand(String input[]) {
+    public void runCommand(String input[]) throws AccessDeniedException, UserNotFoundException {
         if (!CurrentData.getInstance().getCurrentUser().getAccessLevel().equals(AccessLevel.NONE)) {
-            System.out.println("Already logged in!");
-            return;
+            throw new AccessDeniedException("Already logged in!");
         }
         Scanner scanner=new Scanner(System.in);
         String[] users= ReadFromFile.readFile("Data"+File.separator+"users.txt").split("\n");
@@ -31,7 +32,7 @@ public class LoginCommand implements Command{
             }
         }
         if(CurrentData.getInstance().getCurrentUser().getAccessLevel().equals(AccessLevel.NONE))
-            System.out.println("Username or password is wrong.");
+            throw new UserNotFoundException("Username or password is wrong");
     }
 }
 

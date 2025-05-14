@@ -2,6 +2,7 @@ package bg.tu_varna.sit.a1.f23621671.Commands;
 
 import bg.tu_varna.sit.a1.f23621671.Books.Book;
 import bg.tu_varna.sit.a1.f23621671.Books.Library;
+import bg.tu_varna.sit.a1.f23621671.Exceptions.InvalidCommandArgumentsException;
 
 import java.util.*;
 
@@ -29,23 +30,22 @@ public class BooksSortCommand implements Command{
         return asc ? comp : comp.reversed();
     }
     @Override
-    public void runCommand(String input[]) {
-        String criteria = input[0];
+    public void runCommand(String input[]) throws InvalidCommandArgumentsException {
+        String[] argArr=input[0].split(" ",2);
+        String criteria = argArr[0];
         boolean asc = true;
 
-        if (input.length > 1) {
-            if (input[1].equalsIgnoreCase("desc")) {
+        if (argArr.length > 1) {
+            if (argArr[1].equalsIgnoreCase("desc")) {
                 asc = false;
-            } else if (!input[1].equalsIgnoreCase("asc")) {
-                System.out.println("Invalid order! Use 'asc' or 'desc'.");
-                return;
+            } else if (!argArr[1].equalsIgnoreCase("asc")) {
+                throw new InvalidCommandArgumentsException("Invalid order! Use 'asc' or 'desc'.");
             }
         }
-
+        System.out.println(criteria);
         Comparator<Book> comparator = getComparator(criteria, asc);
         if (comparator == null) {
-            System.out.println("Invalid sorting criteria.");
-            return;
+            throw new InvalidCommandArgumentsException("Invalid sorting criteria!");
         }
 
         List<Book> sorted = mergeSort(new ArrayList<>(Library.getInstance().getBooks()), comparator);

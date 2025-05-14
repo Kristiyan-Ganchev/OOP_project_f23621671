@@ -1,5 +1,7 @@
 package bg.tu_varna.sit.a1.f23621671.Books;
 
+import bg.tu_varna.sit.a1.f23621671.Exceptions.BookNotFoundException;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,11 +26,11 @@ public class Library {
             System.out.println("Book with ISBN " + book.getIsbn() + " already exists!");
         }
     }
-    public  void removeBook(String isbn){
+    public  void removeBook(String isbn) throws BookNotFoundException {
         if (bookSet.removeIf(book -> book.getIsbn().equalsIgnoreCase(isbn))) {
             System.out.println("Book removed!");
         }
-        else System.out.println("Book not found");
+        else throw new BookNotFoundException("Book not found!");
     }
     public  void clearBooks() {
         bookSet.clear();
