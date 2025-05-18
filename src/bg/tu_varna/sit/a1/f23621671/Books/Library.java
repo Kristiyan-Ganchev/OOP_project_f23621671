@@ -9,35 +9,41 @@ import java.util.Set;
 public class Library {
     private static Set<Book> bookSet;
     private static Library instance = null;
-    private Library(){
-         bookSet = new HashSet<>();
+
+    private Library() {
+        bookSet = new HashSet<>();
     }
-    public static Library getInstance(){
-        if(instance==null){
-            instance=new Library();
+
+    public static Library getInstance() {
+        if (instance == null) {
+            instance = new Library();
         }
         return instance;
     }
-    public  Set<Book> getBooks() {
+
+    public Set<Book> getBooks() {
         return Collections.unmodifiableSet(bookSet);
     }
-    public  void addBook(Book book){
+
+    public void addBook(Book book) {
         if (!bookSet.add(book)) {
             System.out.println("Book with ISBN " + book.getIsbn() + " already exists!");
         }
     }
-    public  void removeBook(String isbn) throws BookNotFoundException {
+
+    public void removeBook(String isbn) throws BookNotFoundException {
         if (bookSet.removeIf(book -> book.getIsbn().equalsIgnoreCase(isbn))) {
             System.out.println("Book removed!");
-        }
-        else throw new BookNotFoundException("Book not found!");
+        } else throw new BookNotFoundException("Book not found!");
     }
-    public  void clearBooks() {
+
+    public void clearBooks() {
         bookSet.clear();
     }
-    public static String toContent(){
-        StringBuilder content=new StringBuilder();
-        for (Book book: getInstance().getBooks()) {
+
+    public static String toContent() {
+        StringBuilder content = new StringBuilder();
+        for (Book book : getInstance().getBooks()) {
             content.append(book.toWrite());
         }
         if (Library.getInstance().getBooks().isEmpty()) {

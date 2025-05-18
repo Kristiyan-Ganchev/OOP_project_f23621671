@@ -10,9 +10,10 @@ import bg.tu_varna.sit.a1.f23621671.Exceptions.NoDataException;
 import java.util.*;
 
 public class CommandProcessor {
-    private static final Map<CommandEnums, Command> commandMap=new HashMap<>();
+    private static final Map<CommandEnums, Command> commandMap = new HashMap<>();
+
     static {
-        commandMap.put(CommandEnums.EXIT,new ExitCommand());
+        commandMap.put(CommandEnums.EXIT, new ExitCommand());
         commandMap.put(CommandEnums.OPEN, new OpenCommand());
         commandMap.put(CommandEnums.CLOSE, new CloseCommand());
         commandMap.put(CommandEnums.SAVE, new SaveCommand());
@@ -29,8 +30,9 @@ public class CommandProcessor {
         commandMap.put(CommandEnums.USERS_ADD, new UsersAddCommand());
         commandMap.put(CommandEnums.USERS_REMOVE, new UsersRemoveCommand());
     }
+
     public static void run() throws AccessDeniedException, NoDataException, InvalidCommandArgumentsException, InvalidCommandException {
-        while(true) {
+        while (true) {
             try {
                 System.out.print("> ");
                 Scanner commandLine = new Scanner(System.in);
@@ -47,20 +49,20 @@ public class CommandProcessor {
                             : "";
                     Command command = commandMap.get(commandType);
                     int argCount = arguments.trim().isEmpty() ? 0 : arguments.trim().split("\\s+", commandType.getArgCount()).length;
-                    if (argCount != commandType.getArgCount())
-                        throw new InvalidCommandArgumentsException("Argument count not right! help with command: " + commandType.getDescText());
-                    else if (commandType.isNeedsBooks() && Library.getInstance().getBooks().isEmpty())
+                    commandType.hasAccess(CurrentData.getInstance().getCurrentUser().getAccessLevel());
+                    if (commandType.isNeedsBooks() && Library.getInstance().getBooks().isEmpty())
                         throw new NoDataException("No books loaded!");
-                    else if (commandType.hasAccess(CurrentData.getInstance().getCurrentUser().getAccessLevel())) {
+                    else if (argCount != commandType.getArgCount())
+                        throw new InvalidCommandArgumentsException("Argument count not right! help with command: " + commandType.getDescText().replaceAll("\\s+", " "));
+                    else {
                         argumentsArr = arguments.split("\\s+", commandType.getArgCount());
                         command.runCommand(argumentsArr);
                     }
                 } else {
                     throw new InvalidCommandException("No such command!");
                 }
-            }
-            catch (Exception e){
-                System.out.println("Error: "+e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
             }
         }
     }

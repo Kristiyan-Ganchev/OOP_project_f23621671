@@ -12,15 +12,15 @@ public class Book {
     private final float rating;
     private final String isbn;
 
-    private Book(BookBuilder bookBuilder){
-        this.authorName=bookBuilder.authorName;
-        this.bookTitle= bookBuilder.bookTitle;
-        this.bookGenre=bookBuilder.bookGenre;
-        this.bookDescription=bookBuilder.bookDescription;
-        this.bookYear=bookBuilder.bookYear;
-        this.tags=bookBuilder.tags;
-        this.rating=bookBuilder.rating;
-        this.isbn=bookBuilder.isbn;
+    private Book(BookBuilder bookBuilder) {
+        this.authorName = bookBuilder.authorName;
+        this.bookTitle = bookBuilder.bookTitle;
+        this.bookGenre = bookBuilder.bookGenre;
+        this.bookDescription = bookBuilder.bookDescription;
+        this.bookYear = bookBuilder.bookYear;
+        this.tags = bookBuilder.tags;
+        this.rating = bookBuilder.rating;
+        this.isbn = bookBuilder.isbn;
     }
 
     @Override
@@ -69,12 +69,12 @@ public class Book {
     }
 
     public String toWrite() {
-        return  authorName + ';' +
+        return authorName + ';' +
                 bookTitle + ';' +
                 bookGenre + ';' +
                 isbn + ';' +
                 bookDescription + ';' +
-                bookYear + ';'+
+                bookYear + ';' +
                 tags + ';' +
                 rating + '\n';
     }
@@ -91,7 +91,7 @@ public class Book {
                 "| ISBN:" + isbn;
     }
 
-    public static class BookBuilder{
+    public static class BookBuilder {
         private String authorName;
         private String bookTitle;
         private BookGenres bookGenre;
@@ -101,29 +101,34 @@ public class Book {
         private float rating;
         private String isbn;
 
-        public BookBuilder(String authorName,String bookTitle,BookGenres bookGenre,String isbn){
-            this.authorName=authorName;
-            this.bookTitle=bookTitle;
-            this.bookGenre=bookGenre;
-            this.isbn=isbn;
+        public BookBuilder(String authorName, String bookTitle, BookGenres bookGenre, String isbn) {
+            this.authorName = authorName;
+            this.bookTitle = bookTitle;
+            this.bookGenre = bookGenre;
+            this.isbn = isbn;
         }
-        public BookBuilder withBookDescription(String description){
-            this.bookDescription=description;
+
+        public BookBuilder withBookDescription(String description) {
+            this.bookDescription = description;
             return this;
         }
-        public BookBuilder withBookYear(int year){
-            this.bookYear=year;
+
+        public BookBuilder withBookYear(int year) {
+            this.bookYear = year;
             return this;
         }
-        public BookBuilder witTags(String tags){
-            this.tags=tags;
+
+        public BookBuilder witTags(String tags) {
+            this.tags = tags;
             return this;
         }
-        public BookBuilder withRating(float rating){
-            this.rating=rating;
+
+        public BookBuilder withRating(float rating) {
+            this.rating = rating;
             return this;
         }
-        public Book build(){
+
+        public Book build() {
             return new Book(this);
         }
     }

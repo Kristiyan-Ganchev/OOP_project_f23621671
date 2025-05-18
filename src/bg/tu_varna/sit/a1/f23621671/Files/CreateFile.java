@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class CreateFile {
-    public static void createFile(String filename){
+    public static void createFile(String filename) {
         File file = new File(filename);
         try {
             if (file.createNewFile()) {
@@ -17,5 +17,5 @@ public class CreateFile {
             System.err.println("An error occurred while creating the file: " + e.getMessage());
             ErrorLogger.log(e);
         }
-}
+    }
 }

@@ -5,19 +5,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class ReadFromFile {
-    public static String readFile(String filename){
-        String fileContent="";
+    public static String readFile(String filename) {
+        String fileContent = "";
         File file = new File(filename);
 
         try {
             if (!file.exists()) {
                 System.out.println("File does not exist!");
-            }
-            else {
-                fileContent= Files.readString(file.toPath());
+            } else {
+                fileContent = Files.readString(file.toPath());
             }
         } catch (IOException e) {
-            System.out.println("Error: "+e);
+            System.out.println("Error: " + e);
             ErrorLogger.log(e);
             System.exit(1);
         }

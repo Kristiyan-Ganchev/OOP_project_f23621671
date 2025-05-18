@@ -6,7 +6,7 @@ import bg.tu_varna.sit.a1.f23621671.Exceptions.InvalidCommandArgumentsException;
 
 import java.util.*;
 
-public class BooksSortCommand implements Command{
+public class BooksSortCommand implements Command {
     private Comparator<Book> getComparator(String criteria, boolean asc) {
         Comparator<Book> comp;
 
@@ -29,9 +29,10 @@ public class BooksSortCommand implements Command{
 
         return asc ? comp : comp.reversed();
     }
+
     @Override
     public void runCommand(String input[]) throws InvalidCommandArgumentsException {
-        String[] argArr=input[0].split(" ",2);
+        String[] argArr = input[0].split(" ", 2);
         String criteria = argArr[0];
         boolean asc = true;
 
@@ -49,13 +50,14 @@ public class BooksSortCommand implements Command{
         }
 
         List<Book> sorted = mergeSort(new ArrayList<>(Library.getInstance().getBooks()), comparator);
-        for (Book book: sorted
-             ) {
+        for (Book book : sorted
+        ) {
             System.out.println(book);
         }
 
         System.out.println("Books sorted by " + criteria + " in " + (asc ? "ascending" : "descending") + " order.");
     }
+
     private List<Book> mergeSort(List<Book> list, Comparator<Book> comparator) {
         if (list.size() <= 1) return list;
 
