@@ -32,7 +32,10 @@ public class Library {
     }
 
     public void removeBook(String isbn) throws BookNotFoundException {
-        if (bookSet.removeIf(book -> book.getIsbn().equalsIgnoreCase(isbn))) {
+        if (bookSet.contains(new Book.BookBuilder("", "", BookGenres.DEFAULT, isbn)
+                .withBookDescription("").withBookYear(0).withRating(0).witTags("").build())) {
+            bookSet.remove(new Book.BookBuilder("", "", BookGenres.DEFAULT, isbn)
+                    .withBookDescription("").withBookYear(0).withRating(0).witTags("").build());
             System.out.println("Book removed!");
         } else throw new BookNotFoundException("Book not found!");
     }

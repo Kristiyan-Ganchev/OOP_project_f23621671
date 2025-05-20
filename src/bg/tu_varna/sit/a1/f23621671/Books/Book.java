@@ -33,7 +33,7 @@ public class Book {
 
     @Override
     public int hashCode() {
-        return Objects.hash(isbn);
+        return isbn.hashCode();
     }
 
     public String getAuthorName() {

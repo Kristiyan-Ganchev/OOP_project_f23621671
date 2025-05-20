@@ -7,5 +7,6 @@ public enum BookGenres {
     FANTASY,
     SATIRE,
     ROMANCE,
-    CLASSIC
+    CLASSIC,
+    DEFAULT
 }
