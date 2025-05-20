@@ -26,7 +26,7 @@ public class BooksFindCommand implements Command {
                 break;
             }
             default:
-                throw new InvalidCommandArgumentsException("No such search field: " + input[1]);
+                throw new InvalidCommandArgumentsException("No such search field: " + input[0]);
         }
         boolean found = Library.getInstance().getBooks().stream()
                 .filter(filter)

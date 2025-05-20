@@ -32,18 +32,16 @@ public class BooksSortCommand implements Command {
 
     @Override
     public void runCommand(String input[]) throws InvalidCommandArgumentsException {
-        String[] argArr = input[0].split(" ", 2);
-        String criteria = argArr[0];
+        String criteria = input[0];
         boolean asc = true;
 
-        if (argArr.length > 1) {
-            if (argArr[1].equalsIgnoreCase("desc")) {
+        if (input.length > 1) {
+            if (input[1].equalsIgnoreCase("desc")) {
                 asc = false;
-            } else if (!argArr[1].equalsIgnoreCase("asc")) {
+            } else if (!input[1].equalsIgnoreCase("asc")) {
                 throw new InvalidCommandArgumentsException("Invalid order! Use 'asc' or 'desc'.");
             }
         }
-        System.out.println(criteria);
         Comparator<Book> comparator = getComparator(criteria, asc);
         if (comparator == null) {
             throw new InvalidCommandArgumentsException("Invalid sorting criteria!");
