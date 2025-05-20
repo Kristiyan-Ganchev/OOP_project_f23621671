@@ -11,7 +11,25 @@ import bg.tu_varna.sit.a1.f23621671.Users.User;
 import java.io.File;
 import java.util.Scanner;
 
+/**
+ * Command implementation for user login.
+ * Prompts the user to enter a username and password,
+ * verifies the credentials against a stored users file,
+ * and updates the current user in the application context if successful.
+ *
+ * @throws AccessDeniedException if a user is already logged in.
+ * @throws UserNotFoundException if the provided username/password do not match any user.
+ */
 public class LoginCommand implements Command {
+    /**
+     * Runs the login command by prompting for username and password,
+     * authenticating against stored users,
+     * and setting the current user on success.
+     *
+     * @param input the command arguments (ignored)
+     * @throws AccessDeniedException if a user is already logged in.
+     * @throws UserNotFoundException if login credentials are invalid.
+     */
     @Override
     public void runCommand(String input[]) throws AccessDeniedException, UserNotFoundException {
         if (!CurrentData.getInstance().getCurrentUser().getAccessLevel().equals(AccessLevel.NONE)) {

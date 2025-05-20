@@ -11,6 +11,13 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Processes user commands in a command-line interface.
+ * <p>
+ * Maintains a mapping of available commands and executes them based on user input.
+ * Handles command validation, access control, and argument parsing, including support for quoted arguments.
+ * </p>
+ */
 public class CommandProcessor {
     private static final Map<CommandEnums, Command> commandMap = new HashMap<>();
 
@@ -32,6 +39,20 @@ public class CommandProcessor {
         commandMap.put(CommandEnums.USERS_ADD, new UsersAddCommand());
         commandMap.put(CommandEnums.USERS_REMOVE, new UsersRemoveCommand());
     }
+
+    /**
+     * Runs the command processing loop, reading commands from the user and executing them.
+     * <p>
+     * Continuously prompts for user input, parses commands with support for quoted arguments,
+     * validates commands and argument counts, checks access levels, and executes the corresponding command.
+     * Errors during command processing are caught and displayed without terminating the loop.
+     * </p>
+     *
+     * @throws AccessDeniedException            if the current user does not have permission to execute a command
+     * @throws NoDataException                  if required data (e.g., books) is not loaded when needed
+     * @throws InvalidCommandArgumentsException if command arguments are invalid or missing
+     * @throws InvalidCommandException          if the command is unknown or malformed
+     */
     public static void run() throws AccessDeniedException, NoDataException, InvalidCommandArgumentsException, InvalidCommandException {
         while (true) {
             try {
@@ -58,7 +79,7 @@ public class CommandProcessor {
                     commandType.hasAccess(CurrentData.getInstance().getCurrentUser().getAccessLevel());
                     if (commandType.isNeedsBooks() && Library.getInstance().getBooks().isEmpty())
                         throw new NoDataException("No books loaded!");
-                    else if (argCount != commandType.getArgCount()&&(commandType.equals(CommandEnums.BOOKS_SORT)&&argCount-1!=commandType.getArgCount()))
+                    else if (argCount != commandType.getArgCount() && (commandType.equals(CommandEnums.BOOKS_SORT) && argCount - 1 != commandType.getArgCount()))
                         throw new InvalidCommandArgumentsException("Argument count not right! help with command: " + commandType.getDescText().replaceAll("\\s+", " "));
                     else {
                         command.runCommand(argumentsArr);
@@ -71,6 +92,17 @@ public class CommandProcessor {
             }
         }
     }
+
+    /**
+     * Splits an input string into arguments, respecting quoted substrings.
+     * <p>
+     * Supports arguments enclosed in double quotes ("") or single quotes (''),
+     * treating quoted text as a single argument even if it contains spaces.
+     * </p>
+     *
+     * @param input the input command line string
+     * @return an array of argument strings parsed from the input
+     */
     private static String[] splitArgumentsRespectingQuotes(String input) {
         List<String> tokens = new ArrayList<>();
         Matcher matcher = Pattern.compile("\"([^\"]*)\"|'([^']*)'|\\S+").matcher(input);

@@ -6,7 +6,19 @@ import bg.tu_varna.sit.a1.f23621671.Exceptions.InvalidCommandArgumentsException;
 
 import java.util.*;
 
+/**
+ * Command implementation to sort and display books in the library based on a specified criterion.
+ * Supports sorting by title, author, year, or rating, in ascending or descending order.
+ * Uses a custom merge sort implementation.
+ */
 public class BooksSortCommand implements Command {
+    /**
+     * Returns a comparator for books based on the given criteria and order.
+     *
+     * @param criteria the field to sort by ("title", "author", "year", or "rating")
+     * @param asc      true for ascending order, false for descending
+     * @return a Comparator<Book> or null if criteria is invalid
+     */
     private Comparator<Book> getComparator(String criteria, boolean asc) {
         Comparator<Book> comp;
 
@@ -30,6 +42,14 @@ public class BooksSortCommand implements Command {
         return asc ? comp : comp.reversed();
     }
 
+    /**
+     * Executes the sort command using input arguments.
+     * The first argument specifies the sorting criteria.
+     * The second argument (optional) specifies the order: "asc" or "desc" (default is ascending).
+     *
+     * @param input input arguments; input[0] is the criteria, input[1] (optional) is the order
+     * @throws InvalidCommandArgumentsException if the criteria or order is invalid
+     */
     @Override
     public void runCommand(String input[]) throws InvalidCommandArgumentsException {
         String criteria = input[0];
@@ -56,6 +76,13 @@ public class BooksSortCommand implements Command {
         System.out.println("Books sorted by " + criteria + " in " + (asc ? "ascending" : "descending") + " order.");
     }
 
+    /**
+     * Performs a merge sort on the given list using the specified comparator.
+     *
+     * @param list       the list to sort
+     * @param comparator the comparator to determine order
+     * @return a new sorted list
+     */
     private List<Book> mergeSort(List<Book> list, Comparator<Book> comparator) {
         if (list.size() <= 1) return list;
 
@@ -66,6 +93,14 @@ public class BooksSortCommand implements Command {
         return merge(left, right, comparator);
     }
 
+    /**
+     * Merges two sorted lists into one sorted list using the comparator.
+     *
+     * @param left       the first sorted list
+     * @param right      the second sorted list
+     * @param comparator the comparator to determine order
+     * @return a merged sorted list
+     */
     private List<Book> merge(List<Book> left, List<Book> right, Comparator<Book> comparator) {
         List<Book> result = new ArrayList<>();
         int i = 0, j = 0;
