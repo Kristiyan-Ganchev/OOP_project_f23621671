@@ -35,7 +35,7 @@ public class OpenCommand implements Command {
             Library.getInstance().addBook(new Book.BookBuilder(bookData[0], bookData[1], BookGenres.valueOf(bookData[2].toUpperCase(Locale.ROOT)), bookData[3])
                     .withBookDescription(bookData[4])
                     .withBookYear((Integer.parseInt(bookData[5])))
-                    .witTags(bookData[6])
+                    .withTags(bookData[6])
                     .withRating(Float.parseFloat(bookData[7]))
                     .build());
         }

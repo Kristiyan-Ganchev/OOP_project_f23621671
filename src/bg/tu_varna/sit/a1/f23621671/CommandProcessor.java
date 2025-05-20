@@ -32,7 +32,6 @@ public class CommandProcessor {
         commandMap.put(CommandEnums.USERS_ADD, new UsersAddCommand());
         commandMap.put(CommandEnums.USERS_REMOVE, new UsersRemoveCommand());
     }
-
     public static void run() throws AccessDeniedException, NoDataException, InvalidCommandArgumentsException, InvalidCommandException {
         while (true) {
             try {

@@ -13,7 +13,7 @@ public class BooksAddCommand implements Command {
         Book book;
         try {
             book = new Book.BookBuilder(input[0], input[1], BookGenres.valueOf(input[2].toUpperCase(Locale.ROOT)), input[3])
-                    .withBookDescription(input[4]).withBookYear(Integer.parseInt(input[5])).withRating(Float.parseFloat(input[6])).witTags(input[7]).build();
+                    .withBookDescription(input[4]).withBookYear(Integer.parseInt(input[5])).withRating(Float.parseFloat(input[6])).withTags(input[7]).build();
         } catch (Exception e) {
             throw new BadDataException("Invalid data entered. Command help: "+CommandEnums.BOOKS_ADD.getDescText());
         }

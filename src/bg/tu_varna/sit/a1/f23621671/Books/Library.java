@@ -33,9 +33,9 @@ public class Library {
 
     public void removeBook(String isbn) throws BookNotFoundException {
         if (bookSet.contains(new Book.BookBuilder("", "", BookGenres.DEFAULT, isbn)
-                .withBookDescription("").withBookYear(0).withRating(0).witTags("").build())) {
+                .withBookDescription("").withBookYear(0).withRating(0).withTags("").build())) {
             bookSet.remove(new Book.BookBuilder("", "", BookGenres.DEFAULT, isbn)
-                    .withBookDescription("").withBookYear(0).withRating(0).witTags("").build());
+                    .withBookDescription("").withBookYear(0).withRating(0).withTags("").build());
             System.out.println("Book removed!");
         } else throw new BookNotFoundException("Book not found!");
     }

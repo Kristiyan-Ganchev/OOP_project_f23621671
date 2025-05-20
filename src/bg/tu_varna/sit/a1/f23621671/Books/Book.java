@@ -118,7 +118,7 @@ public class Book {
             return this;
         }
 
-        public BookBuilder witTags(String tags) {
+        public BookBuilder withTags(String tags) {
             this.tags = tags;
             return this;
         }
