@@ -1,7 +1,5 @@
 package bg.tu_varna.sit.a1.f23621671.Books;
 
-import java.util.Objects;
-
 /**
  * Represents a book with details such as author name, title, genre, description,
  * publication year, tags, rating, and ISBN.

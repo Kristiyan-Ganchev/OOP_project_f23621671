@@ -33,7 +33,7 @@ public class OpenCommand implements Command {
      * @throws FileStateException if a file is already open
      */
     @Override
-    public void runCommand(String input[]) throws NoDataException, FileStateException {
+    public void runCommand(String[] input) throws NoDataException, FileStateException {
         if (!CurrentData.getInstance().getCurrentFile().isEmpty()) {
             throw new FileStateException("File already open!");
         }

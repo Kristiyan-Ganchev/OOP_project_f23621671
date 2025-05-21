@@ -12,7 +12,7 @@ public class HelpCommand implements Command {
      * @param input the command arguments (ignored)
      */
     @Override
-    public void runCommand(String input[]) {
+    public void runCommand(String[] input) {
         System.out.println("The following commands are supported:");
         for (CommandEnums command : CommandEnums.values()) {
             System.out.println(command.getDescText());

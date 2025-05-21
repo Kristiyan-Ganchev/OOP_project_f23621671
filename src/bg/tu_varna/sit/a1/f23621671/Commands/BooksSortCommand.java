@@ -51,7 +51,7 @@ public class BooksSortCommand implements Command {
      * @throws InvalidCommandArgumentsException if the criteria or order is invalid
      */
     @Override
-    public void runCommand(String input[]) throws InvalidCommandArgumentsException {
+    public void runCommand(String[] input) throws InvalidCommandArgumentsException {
         String criteria = input[0];
         boolean asc = true;
 

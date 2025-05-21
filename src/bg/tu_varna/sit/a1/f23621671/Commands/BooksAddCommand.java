@@ -31,7 +31,7 @@ public class BooksAddCommand implements Command {
      * @throws BadDataException if the data is invalid or the book already exists in the library
      */
     @Override
-    public void runCommand(String input[]) throws BadDataException {
+    public void runCommand(String[] input) throws BadDataException {
         Book book;
         try {
             book = new Book.BookBuilder(input[0], input[1], BookGenres.valueOf(input[2].toUpperCase(Locale.ROOT)), input[3])

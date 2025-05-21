@@ -16,7 +16,7 @@ public class BooksInfoCommand implements Command {
      * @throws NoDataException if no book with the given ISBN is found in the library
      */
     @Override
-    public void runCommand(String input[]) throws NoDataException {
+    public void runCommand(String[] input) throws NoDataException {
         boolean bookFound = false;
         for (Book book : Library.getInstance().getBooks()) {
             if (book.getIsbn().equalsIgnoreCase(input[0])) {

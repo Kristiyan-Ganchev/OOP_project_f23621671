@@ -19,5 +19,5 @@ public interface Command {
      * @throws FileStateException               if there is an error related to file state
      * @throws BadDataException                 if the provided data is malformed or incorrect
      */
-    void runCommand(String input[]) throws BookNotFoundException, InvalidCommandArgumentsException, AccessDeniedException, UserNotFoundException, NoDataException, FileStateException, BadDataException;
+    void runCommand(String[] input) throws BookNotFoundException, InvalidCommandArgumentsException, AccessDeniedException, UserNotFoundException, NoDataException, FileStateException, BadDataException;
 }

@@ -24,7 +24,7 @@ public class BooksFindCommand implements Command {
      * @throws BookNotFoundException            if no books matching the search criteria are found
      */
     @Override
-    public void runCommand(String input[]) throws InvalidCommandArgumentsException, BookNotFoundException {
+    public void runCommand(String[] input) throws InvalidCommandArgumentsException, BookNotFoundException {
         Predicate<Book> filter;
         switch (input[0].toLowerCase(Locale.ROOT)) {
             case "author": {

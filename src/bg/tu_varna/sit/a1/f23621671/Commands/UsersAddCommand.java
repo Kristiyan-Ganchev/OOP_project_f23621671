@@ -26,7 +26,7 @@ public class UsersAddCommand implements Command {
      * @param input The command arguments: {@code input[0]} is the username, {@code input[1]} is the password.
      */
     @Override
-    public void runCommand(String input[]) {
+    public void runCommand(String[] input) {
         boolean userExists = false;
         String[] users = ReadFromFile.readFile("Data/users.txt").split("\n");
 

@@ -14,7 +14,7 @@ public class BooksRemoveCommand implements Command {
      * @throws BookNotFoundException if the book with the specified ISBN does not exist in the library
      */
     @Override
-    public void runCommand(String input[]) throws BookNotFoundException {
+    public void runCommand(String[] input) throws BookNotFoundException {
         Library.getInstance().removeBook(input[0]);
     }
 }

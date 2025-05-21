@@ -25,7 +25,7 @@ public class UsersRemoveCommand implements Command {
      * @throws NoDataException If the specified user does not exist.
      */
     @Override
-    public void runCommand(String input[]) throws NoDataException {
+    public void runCommand(String[] input) throws NoDataException {
         String[] users = ReadFromFile.readFile("Data/users.txt").split("\n");
         StringBuilder tempFile = new StringBuilder();
         boolean userExists = false;

@@ -15,7 +15,7 @@ public class CloseCommand implements Command {
      * @param input command arguments (not used)
      */
     @Override
-    public void runCommand(String input[]) {
+    public void runCommand(String[] input) {
         Library.getInstance().clearBooks();
         System.out.println("Successfully closed " + CurrentData.getInstance().getCurrentFile());
         CurrentData.getInstance().setCurrentFile("");

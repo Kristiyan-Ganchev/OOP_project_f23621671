@@ -18,7 +18,7 @@ public class LogoutCommand implements Command {
      * @param input the command arguments (not used for this command)
      */
     @Override
-    public void runCommand(String input[]) {
+    public void runCommand(String[] input) {
         CurrentData.getInstance().setCurrentUser(new User("none", "none", AccessLevel.NONE));
         System.out.println("Logged out.");
     }

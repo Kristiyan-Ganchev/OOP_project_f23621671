@@ -18,7 +18,7 @@ public class SaveAsCommand implements Command {
      * @param input the command arguments, where input[0] is the target file path
      */
     @Override
-    public void runCommand(String input[]) {
+    public void runCommand(String[] input) {
         WriteToFile.Write(input[0], Library.getInstance().toContent(), false);
         System.out.println("Succesfully saved " + input[0]);
     }

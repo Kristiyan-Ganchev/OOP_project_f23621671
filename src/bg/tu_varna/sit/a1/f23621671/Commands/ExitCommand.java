@@ -11,7 +11,7 @@ public class ExitCommand implements Command {
      * @param input the command arguments (ignored)
      */
     @Override
-    public void runCommand(String input[]) {
+    public void runCommand(String[] input) {
         System.out.print("Exiting the program...");
         System.exit(0);
     }

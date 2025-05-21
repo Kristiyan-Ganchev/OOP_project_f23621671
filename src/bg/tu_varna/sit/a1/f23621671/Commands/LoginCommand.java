@@ -31,7 +31,7 @@ public class LoginCommand implements Command {
      * @throws UserNotFoundException if login credentials are invalid.
      */
     @Override
-    public void runCommand(String input[]) throws AccessDeniedException, UserNotFoundException {
+    public void runCommand(String[] input) throws AccessDeniedException, UserNotFoundException {
         if (!CurrentData.getInstance().getCurrentUser().getAccessLevel().equals(AccessLevel.NONE)) {
             throw new AccessDeniedException("Already logged in!");
         }

@@ -15,7 +15,7 @@ public class BooksAllCommand implements Command {
      * @param input an array of input strings (not used)
      */
     @Override
-    public void runCommand(String input[]) {
+    public void runCommand(String[] input) {
         for (Book book : Library.getInstance().getBooks()) {
             System.out.println("TITLE: " + book.getBookTitle() + " AUTHOR: " + book.getAuthorName() + " GENRE: " + book.getBookGenre() + " ISBN: " + book.getIsbn());
         }

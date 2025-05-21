@@ -25,7 +25,7 @@ public class SaveCommand implements Command {
      * @throws NoDataException if no file is currently open.
      */
     @Override
-    public void runCommand(String input[]) throws NoDataException {
+    public void runCommand(String[] input) throws NoDataException {
         if (CurrentData.getInstance().getCurrentFile().equalsIgnoreCase(""))
             throw new NoDataException("Must have file open to use command!");
         WriteToFile.Write(CurrentData.getInstance().getCurrentFile(), Library.getInstance().toContent(), false);
